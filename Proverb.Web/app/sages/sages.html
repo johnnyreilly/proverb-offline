@@ -1,0 +1,44 @@
+﻿<section class="mainbar" data-ng-controller="sages as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <!--<div class="row-fluid">
+                <div class="form-search">
+                    <input class="input-medium search-query"
+                           data-ng-model="vm.speakerSearch"
+                           data-ng-keyup="vm.search($event)"
+                           placeholder="live search..." />
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-info"
+                           data-ng-click="vm.refresh()"><i class="icon-refresh"></i><span>Refresh</span></a>
+                    </div>
+                </div>
+            </div>-->
+            <div class="row-fluid">
+                <div class="widget wviolet">
+                    <div widget-header
+                         title="{{vm.title}}"
+                         subtitle="{{vm.sages.length}}"></div>
+
+                    <div class="widget-content user">
+                        <div class="padd list-flow"
+                             ng-repeat="s in vm.sages | orderBy:'name'">
+                            <a ng-href="#/sages/detail/{{s.id}}">
+                                <div class="user">
+                                    <!--<img img-person="{{s.imageSource}}" class="img-polaroid stacked" />-->
+                                    <div class="text-center"><i class="fa fa-user fa-5x"></i></div>
+                                    <div class="name-stack">
+                                        <h5>{{s.name}}</h5>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

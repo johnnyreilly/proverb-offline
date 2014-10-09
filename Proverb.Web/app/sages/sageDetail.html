@@ -1,0 +1,34 @@
+﻿<section class="mainbar" ng-controller="sageDetail as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div>
+                <a ng-click="vm.gotoEdit()"><span class="fa fa-pencil fa-lg"></span> Edit</a>
+            </div>
+            <div class="widget wblue">
+                <div widget-header title="{{vm.title}}"></div>
+                <div class="widget-content form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2">Name</label>
+                        <div class="col-xs-12 col-sm-9">{{vm.sage.name}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2">Username</label>
+                        <div class="col-xs-12 col-sm-9">{{vm.sage.userName}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2">Email</label>
+                        <div class="col-xs-12 col-sm-9">{{vm.sage.email}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2">Date of Birth</label>
+                        <div class="col-xs-12 col-sm-9">{{vm.sage.dateOfBirth | date: 'mediumDate'}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2">Sagacity</label>
+                        <div class="col-xs-12 col-sm-9">{{vm.sage.sagacity | number: 0}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

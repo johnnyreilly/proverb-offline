@@ -1,0 +1,13 @@
+﻿<div data-ng-controller="shell as vm">
+    <header class="clearfix">
+        <div ng-include="vm.urlTopNav"></div>
+    </header>
+
+    <section id="content" class="content">
+        <waiter is-waiting="vm.isBusy" spinner-options="vm.spinnerOptions" wait-message="vm.busyMessage"></waiter>
+
+        <div data-ng-include="vm.urlSidebar"></div>
+
+        <div data-ng-view class="shuffle-animation"></div>
+    </section>
+</div>

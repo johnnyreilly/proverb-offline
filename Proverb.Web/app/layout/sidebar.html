@@ -1,0 +1,13 @@
+﻿<div sidebar ng-controller="sidebar as vm">
+    <div class="sidebar-filler"></div>
+    <div class="sidebar-dropdown"><a>Menu</a></div>
+    <div class="sidebar-inner">
+        <ul class="navi">
+            <li class="nlightblue fade-selection-animation" 
+                ng-class="vm.isCurrent(r)"
+                ng-repeat="r in vm.navRoutes">
+                <a ng-href="#{{r.url}}" ng-bind-html="r.config.settings.content"></a>
+            </li>
+        </ul>
+    </div>
+</div>

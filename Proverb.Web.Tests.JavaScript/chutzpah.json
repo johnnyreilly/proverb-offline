@@ -1,0 +1,39 @@
+﻿{
+    "References": [
+        { "Path": "../Proverb.Web/scripts/jQuery-2.1.1.js" },
+        { "Path": "../Proverb.Web/scripts/angular.js" },
+        { "Path": "../Proverb.Web/scripts/angular-animate.js"},
+        { "Path": "../Proverb.Web/scripts/angular-route.js"},
+        { "Path": "../Proverb.Web/scripts/angular-sanitize.js"},
+        { "Path": "../Proverb.Web/scripts/angular-ui/ui-bootstrap-tpls.js"},
+        { "Path": "../Proverb.Web/scripts/angular-mocks.js"},
+
+        { "Path": "../Proverb.Web/scripts/toastr.js" },
+        { "Path": "../Proverb.Web/scripts/moment.js" },
+        { "Path": "../Proverb.Web/scripts/spin.js" },
+        { "Path": "../Proverb.Web/scripts/underscore.js" },
+
+        { "Path": "../Proverb.Web/app/common/common.js" },
+        { "Path": "../Proverb.Web/app/common/logger.js" },
+        { "Path": "../Proverb.Web/app/common/spinner.js" },
+
+        { "Path": "../Proverb.Web/app/common/bootstrap/bootstrap.dialog.js" },
+
+        { "Path": "../Proverb.Web/app/app.js"},
+        { "Path": "../Proverb.Web/app/config.route.js"},
+
+        { "Path": "../Proverb.Web/app/directives", "Include": "*.js"},
+        { "Path": "../Proverb.Web/app/services", "Include": "*.js"},
+
+        { "Path": "../Proverb.Web/app/admin", "Include": "*.js"},
+        { "Path": "../Proverb.Web/app/dashboard", "Include": "*.js"},
+        { "Path": "../Proverb.Web/app/layout", "Include": "*.js"},
+        { "Path": "../Proverb.Web/app/sayings", "Include": "*.js"},
+        { "Path": "../Proverb.Web/app/sages", "Include": "*.js"},
+
+        { "Path": "bootstrapper.js" }
+    ],
+    "Tests": [
+        { "Path": "app", "Include": "*.js" }
+    ]
+}

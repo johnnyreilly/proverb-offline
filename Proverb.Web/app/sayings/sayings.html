@@ -1,0 +1,41 @@
+﻿<section class="mainbar" data-ng-controller="sayings as vm">
+    <section class="matter">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="pull-left">
+                    <a ng-click="vm.gotoAdd()"><span class="fa fa-plus fa-lg"></span> Add</a>
+                </div>
+
+                <div class="pull-right">
+                    <select ng-model="vm.selectedSage" ng-options="sage.name for sage in vm.sages"
+                            ng-change="vm.selectedSageChange()">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="widget wlightblue">
+                    <div widget-header
+                         title="{{vm.title}}"
+                         subtitle="{{(vm.sayings|filter:vm.bySelectedSage).length}}"></div>
+
+                    <div class="widget-content">
+                        <blockquote data-ng-repeat="s in vm.sayings | filter:vm.bySelectedSage">
+                            <p><a ng-href="#/sayings/edit/{{s.id}}">{{s.text}}</a></p>
+                            <footer>{{s.sage.name}}</footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

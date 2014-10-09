@@ -1,0 +1,19 @@
+﻿<nav class="navbar navbar-fixed-top navbar-inverse" ng-controller="topnav as vm">
+    <div class="navbar-header">
+        <a href="#/" class="navbar-brand"><span class="brand-title">Proverb</span></a>
+        <a class="btn navbar-btn navbar-toggle" ng-click="vm.toggleCollapsed()">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div collapse="vm.isCollapsed" class="navbar-collapse">
+        <div class="pull-right navbar-logo">
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown dropdown-big">
+                    <a href="#/about">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

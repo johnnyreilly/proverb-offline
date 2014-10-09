@@ -1,0 +1,42 @@
+﻿<section id="dashboard-view" class="mainbar" ng-controller="dashboard as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="jumbotron">
+                        <div class="center-block text-center" style="max-width: 250px;">
+                            <h2>The Wisdom of Socrates Aruldas</h2>
+                            <img src="/Content/images/socrates-statue.jpg" class="img-rounded" />
+                            <h3>(and the team...)</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div widget-header title="Sages"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Username</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="s in vm.sages">
+                                        <td><a ng-href="#/sayings/?sageId={{s.id}}">{{s.name}}</a></td>
+                                        <td><a ng-href="#/sayings/?sageId={{s.id}}">{{s.userName}}</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
