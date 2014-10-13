@@ -82,7 +82,7 @@
     function configureHttpProvider() {
         var serviceId = "urlInterceptor";
         app.factory(serviceId, [
-            "config", function (config) {
+            "$templateCache", "config", function ($templateCache, config) {
                 var service = {
                     request: request
                 };
@@ -94,7 +94,12 @@
                     // and we want a suffix to either allow caching or prevent caching
                     // (depending on whether in debug mode or not)
                     if (requestConfig.method === "GET" && endsWith(requestConfig.url.toLowerCase(), ".html")) {
-                        requestConfig.url = config.appRoot + requestConfig.url + config.urlCacheBusterSuffix;
+                        // If this has already been placed into a primed template cache then we should leave the URL as is
+                        // so that the version in templateCache is served.  If we tweak the URL then it will not be found
+                        var cachedAlready = $templateCache.get(requestConfig.url);
+                        if (!cachedAlready) {
+                            requestConfig.url = config.appRoot + requestConfig.url + config.urlCacheBusterSuffix;
+                        }
                     }
 
                     return requestConfig;

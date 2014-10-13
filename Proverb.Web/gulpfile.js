@@ -78,6 +78,9 @@ var filesAndFolders = {
     ]
 };
 
+filesAndFolders.debugFolder = filesAndFolders.buildBaseFolder + "/" + filesAndFolders.debug + "/";
+filesAndFolders.releaseFolder = filesAndFolders.buildBaseFolder + "/" + filesAndFolders.release + "/";
+
 /**
  * Create a manifest depending upon the supplied arguments
  * 
@@ -111,7 +114,7 @@ gulp.task("scripts-debug", ["clean"], function () {
 
     return gulp
         .src(filesAndFolders.scripts, { base: filesAndFolders.base })
-        .pipe(gulp.dest(filesAndFolders.buildBaseFolder + "/" + filesAndFolders.debug));
+        .pipe(gulp.dest(filesAndFolders.debugFolder));
 });
 
 // Create a manifest.json for the debug build - this should have lots of script files in
@@ -128,7 +131,7 @@ gulp.task("styles-debug", ["clean"], function () {
 
     return gulp
         .src(filesAndFolders.styles, { base: filesAndFolders.base })
-        .pipe(gulp.dest(filesAndFolders.buildBaseFolder + "/" + filesAndFolders.debug));
+        .pipe(gulp.dest(filesAndFolders.debugFolder));
 });
 
 // Create a manifest.json for the debug build - this should have lots of style files in
@@ -143,18 +146,16 @@ gulp.task("manifest-styles-debug", ["styles-debug", "manifest-scripts-debug"], f
 // Concatenate & Minify JS for release into a single file
 gulp.task("scripts-release", ["clean"], function () {
 
-    var releaseFolder = filesAndFolders.buildBaseFolder + filesAndFolders.release;
-
     return gulp
         .src(filesAndFolders.scripts)
-        .pipe(ignore.exclude("**/*.{ts,js.map}")) // Exclude ts and js.map files - not needed in release mode
-
-        .pipe(concat("app.js"))                   // Make a single file - if you want to see the contents then include the line below
-        //.pipe(gulp.dest(releaseFolder))
-
-        .pipe(uglify())                           // Make the file titchy tiny small
-        .pipe(rev())                              // Suffix a version number to it
-        .pipe(gulp.dest(releaseFolder));          // Write single versioned file to build/release folder
+        .pipe(ignore.exclude("**/*.{ts,js.map}"))        // Exclude ts and js.map files - not needed in release mode
+                                                         
+        .pipe(concat("app.js"))                          // Make a single file - if you want to see the contents then include the line below                                          
+        //.pipe(gulp.dest(releaseFolder))                
+                                                         
+        .pipe(uglify())                                  // Make the file titchy tiny small
+        .pipe(rev())                                     // Suffix a version number to it
+        .pipe(gulp.dest(filesAndFolders.releaseFolder)); // Write single versioned file to build/release folder
 });
 
 // Create a manifest.json for the release build - this should just have a single file for scripts
@@ -168,23 +169,21 @@ gulp.task("manifest-scripts-release", ["scripts-release"], function () {
 // Copy across all files in filesAndFolders.styles to build/debug
 gulp.task("styles-release", ["clean"], function () {
 
-    var releaseFolder = filesAndFolders.buildBaseFolder + filesAndFolders.release + "/" + filesAndFolders.css;
-
     return gulp
         .src(filesAndFolders.styles)
-        .pipe(concat("app.css"))                  // Make a single file - if you want to see the contents then include the line below
+        .pipe(concat("app.css"))          // Make a single file - if you want to see the contents then include the line below
         //.pipe(gulp.dest(releaseFolder))
 
-        .pipe(minifyCss())                        // Make the file titchy tiny small
-        .pipe(rev())                              // Suffix a version number to it
-        .pipe(gulp.dest(releaseFolder));          // Write single versioned file to build/release folder
+        .pipe(minifyCss())                // Make the file titchy tiny small
+        .pipe(rev())                      // Suffix a version number to it
+        .pipe(gulp.dest(filesAndFolders.releaseFolder + "/" + filesAndFolders.css)); // Write single versioned file to build/release folder
 });
 
 // Create a manifest.json for the debug build - this should have a single style files in
 gulp.task("manifest-styles-release", ["styles-release", "manifest-scripts-release"], function () {
 
     return gulp
-        .src(filesAndFolders.buildBaseFolder + filesAndFolders.release + "/**/*.css")
+        .src(filesAndFolders.releaseFolder + "**/*.css")
         .pipe(getManifest(filesAndFolders.release, bundleNames.styles, false, filesAndFolders.css + "/"));
 });
 
@@ -193,8 +192,8 @@ gulp.task("fonts", ["clean"], function () {
 
     return gulp
         .src(filesAndFolders.fonts, { base: filesAndFolders.base })
-        .pipe(gulp.dest(filesAndFolders.buildBaseFolder + "/" + filesAndFolders.debug))
-        .pipe(gulp.dest(filesAndFolders.buildBaseFolder + "/" + filesAndFolders.release));
+        .pipe(gulp.dest(filesAndFolders.debugFolder))
+        .pipe(gulp.dest(filesAndFolders.releaseFolder));
 });
 
 // Default Task
