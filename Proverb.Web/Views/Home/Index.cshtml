@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -25,7 +22,6 @@
         }
     </script>
     <link rel="icon" type="image/png" href="~/content/images/icon.png">
-    @Styles.Render("~/Content/css")
 </head>
 <body>
     <div>
@@ -99,12 +95,23 @@
                     var manifestFile = buildFolder + "manifest-" + debugOrRelease + ".json";
                     var outputFolder = buildFolder + debugOrRelease + "/";
 
+                    // Load JavaScript and CSS listed in manifest file
                     $.getJSON(manifestFile)
                         .done(function (manifest){
 
+                            manifest.styles.forEach(function (href) {
+                                var link = document.createElement("link");
+
+                                link.rel = "stylesheet";
+                                link.media = "all";
+                                link.href = outputFolder + href.replace(/\\\\/g, "/"); // Convert "\\" to "/"
+
+                                document.head.appendChild(link);
+                            });
+
                             scriptsToLoad = manifest.scripts.length;
                             manifest.scripts.forEach(function (src) {
-                                var script = document.createElement('script');
+                                var script = document.createElement("script");
 
                                 script.onload = onScriptLoad;
                                 script.src = outputFolder + src.replace(/\\\\/g, "/"); // Convert "\\" to "/"

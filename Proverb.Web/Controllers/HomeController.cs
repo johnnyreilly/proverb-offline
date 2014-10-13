@@ -56,19 +56,5 @@ namespace Proverb.Web.Controllers
 
             return Json(startUpData, JsonRequestBehavior.AllowGet);
         }
-        
-        public ViewResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ViewResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

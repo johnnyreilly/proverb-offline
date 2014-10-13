@@ -78,22 +78,5 @@ namespace Proverb.Web.UnitTests.Controllers
             Assert.AreEqual(inDebug, startUpData.InDebug);
             Assert.AreEqual(version, startUpData.Version);
         }
-
-        [TestMethod, TestCategory(CATEGORY)]
-        public void About_sets_ViewBagMessage()
-        {
-            ViewResult result = _controller.About();
-
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod, TestCategory(CATEGORY)]
-        public void Contact_sets_ViewBagMessage()
-        {
-            ViewResult result = _controller.Contact();
-
-            Assert.AreEqual("Your contact page.", result.ViewBag.Message);
-        }
     }
-
 }
