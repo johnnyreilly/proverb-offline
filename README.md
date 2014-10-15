@@ -4,7 +4,7 @@ Proverb is a simple app that stores the wise sayings of sages.  This is a collec
 
 This repository is using the following technologies:
 
-- ASP.Net Web API and MVC
+- ASP.Net Web API
 - Entity Framework 6 Code First
 - TypeScript
 - AngularJS

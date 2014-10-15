@@ -11,9 +11,9 @@ namespace Proverb.Web.Controllers
 {
     public class SayingController : ApiController
     {
-        ISayingService _sayingService;
-        IUserHelper _userHelper;
-        ILog _logger;
+        readonly ISayingService _sayingService;
+        readonly IUserHelper _userHelper;
+        readonly ILog _logger;
 
         public SayingController(
             ISayingService sayingService,

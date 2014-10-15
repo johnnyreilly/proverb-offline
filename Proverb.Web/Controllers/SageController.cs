@@ -11,9 +11,9 @@ namespace Proverb.Web.Controllers
 {
     public class SageController : ApiController
     {
-        ISageService _sageService;
-        IUserHelper _userHelper;
-        ILog _logger;
+        readonly ISageService _sageService;
+        readonly IUserHelper _userHelper;
+        readonly ILog _logger;
 
         public SageController(
             ISageService userService,

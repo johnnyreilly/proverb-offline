@@ -3,7 +3,6 @@ using Proverb.Web.Helpers;
 using Proverb.Web.Logging;
 using System;
 using System.Web.Http;
-using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Proverb.Web
@@ -22,10 +21,7 @@ namespace Proverb.Web
 
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutofacContainer = AutofacConfig.RegisterAndBuild();
 
             string appName, version;
@@ -40,37 +36,9 @@ namespace Proverb.Web
             LoggerHelper.Logger.InfoFormat("{0} v{1} started.", appName, version);
         }
 
-        /// <summary>
-        /// Necessary for Web API to have access to Session
-        /// </summary>
-        //protected void Application_PostAuthorizeRequest()
-        //{
-        //    System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
-        //}
-
         protected void Application_End()
         {
             LoggerHelper.Logger.Info("Application stopping....");
-        }
-
-        /// <summary>
-        /// Sessions not being used at present - code left in case they are later
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="eventArgs"></param>
-        protected void Session_Start(object sender, EventArgs eventArgs)
-        {
-            string userName;
-            using (var scope = AutofacContainer.BeginLifetimeScope())
-            {
-                var userHelper = scope.Resolve<IUserHelper>();
-
-                userName = userHelper.UserName;
-            }
-
-            var browser = Request.Browser;
-            LoggerHelper.Logger.InfoFormat("Session starting for {0} using {1} v{2} session id: {3}",
-                userName, browser.Browser, browser.Version, Session.SessionID.ToString());
         }
 
         protected void Session_End(object sender, EventArgs eventArgs)
