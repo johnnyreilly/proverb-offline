@@ -7,7 +7,7 @@ var ignore = require("gulp-ignore");
 var manifest = require("gulp-asset-manifest");
 var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
-var rev = require('gulp-rev');
+var rev = require("gulp-rev");
 var del = require("del");
 var path = require("path");
 
