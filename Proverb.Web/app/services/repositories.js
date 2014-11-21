@@ -1,16 +1,12 @@
 (function () {
     "use strict";
-
     var serviceId = "repositories";
     angular.module("app").factory(serviceId, ["$injector", repositories]);
-
     function repositories($injector) {
         var service = {
-            getRepo: getRepo
+            getRepo: getRepo,
         };
-
         return service;
-
         // Get named Repository Ctor (by injection), new it, and initialize it
         function getRepo(repoName) {
             var fullRepoName = "repository." + repoName.toLowerCase();

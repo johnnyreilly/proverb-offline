@@ -1,8 +1,6 @@
-﻿(function () {
+(function () {
     "use strict";
-
     var app = angular.module("app");
-
     app.directive("widgetClose", function () {
         // Usage:
         // <a widget-close></a>
@@ -16,12 +14,10 @@
             restrict: "A"
         };
         return directive;
-
         function link(scope, element, attrs) {
             attrs.$set("href", "#");
             attrs.$set("wclose", undefined);
             element.click(close);
-
             function close(e) {
                 e.preventDefault();
                 element.parent().parent().parent().hide(100);

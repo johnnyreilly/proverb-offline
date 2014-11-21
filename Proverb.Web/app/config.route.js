@@ -1,12 +1,9 @@
-﻿(function () {
+(function () {
     "use strict";
-
     var app = angular.module("app");
-
     // Collect the routes
     app.constant("routes", getRoutes());
-
-    // Define the routes
+    // Define the routes 
     function getRoutes() {
         return [
             {
@@ -19,7 +16,8 @@
                         content: '<i class="fa fa-dashboard"></i> Dashboard'
                     }
                 }
-            }, {
+            },
+            {
                 url: "/sages",
                 config: {
                     title: "Sages",
@@ -29,21 +27,24 @@
                         content: '<i class="fa fa-users"></i> Sages'
                     }
                 }
-            }, {
+            },
+            {
                 url: "/sages/detail/:id",
                 config: {
                     title: "sage details",
                     templateUrl: "app/sages/sageDetail.html",
                     settings: {}
                 }
-            }, {
+            },
+            {
                 url: "/sages/edit/:id",
                 config: {
                     title: "Sage Edit",
                     templateUrl: "app/sages/sageEdit.html",
                     settings: {}
                 }
-            }, {
+            },
+            {
                 url: "/sayings/",
                 config: {
                     title: "Sayings",
@@ -54,14 +55,16 @@
                         content: '<i class="fa fa-comment"></i> Sayings'
                     }
                 }
-            }, {
+            },
+            {
                 url: "/sayings/edit/:id",
                 config: {
                     title: "Sage Edit",
                     templateUrl: "app/sayings/sayingEdit.html",
                     settings: {}
                 }
-            }, {
+            },
+            {
                 url: "/about/",
                 config: {
                     title: "About",

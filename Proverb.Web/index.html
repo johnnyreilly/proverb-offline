@@ -43,8 +43,37 @@
     <script>
         (function () {
 
-            var appConfig = {};
-            var scriptsToLoad;
+            var appConfig = {},
+                outputFolder,
+                scriptsToLoad;
+
+            /**
+             * Load JavaScript and CSS listed in manifest file
+             */
+            function loadManifest(manifestFile) {
+                $.getJSON(manifestFile)
+                    .done(function (manifest) {
+                        if (!appConfig.inDebug) {
+                            // If not in release mode then process the manifest straight away - we can assume it's all present and correct
+                            addScriptsAndStylesToPage(manifest);
+                        }
+                        else if (manifest.scripts && manifest.styles) {
+                            // If in debug mode and both scripts and styles are present and correct then process the manifest
+                            addScriptsAndStylesToPage(manifest);
+                        }
+                        else {
+                            // Reload if it looks like the manifest wasn't finished building
+                            setTimeout(function () { loadManifest(manifestFile); }, 500);
+                        }
+                    })
+                    .fail(function (jqXHR) {
+                        console.error("Failed to load " + manifestFile);
+                        // For 404's in debug mode then re-attempt - probably gulp hadn't finished running by the time the page was served
+                        if (appConfig.inDebug && jqXHR.status === 404) {
+                            setTimeout(function () { loadManifest(manifestFile); }, 500);
+                        }
+                    });
+            }
 
             /**
              * Handler which fires as each script loads
@@ -68,6 +97,33 @@
                 }
             }
 
+            /**
+             * Iterate through the manifest and build up scripts and style tags and add them to the page
+             */
+            function addScriptsAndStylesToPage(manifest){
+
+                manifest.styles.forEach(function (href) {
+                    var link = document.createElement("link");
+
+                    link.rel = "stylesheet";
+                    link.media = "all";
+                    link.href = outputFolder + href;
+
+                    document.head.appendChild(link);
+                });
+
+                scriptsToLoad = manifest.scripts.length;
+                manifest.scripts.forEach(function (src) {
+                    var script = document.createElement("script");
+
+                    script.onload = onScriptLoad;
+                    script.src = outputFolder + src;
+                    script.async = false;
+
+                    document.head.appendChild(script);
+                });
+            }
+
             // Load startup data from the server
             $.getJSON("api/Startup")
                 .done(function (startUpData) {
@@ -78,33 +134,9 @@
                     var buildFolder = appConfig.appRoot + "build/";
                     var debugOrRelease = (appConfig.inDebug ? "debug" : "release");
                     var manifestFile = buildFolder + "manifest-" + debugOrRelease + ".json";
-                    var outputFolder = buildFolder + debugOrRelease + "/";
+                    outputFolder = buildFolder + debugOrRelease + "/";
 
-                    // Load JavaScript and CSS listed in manifest file
-                    $.getJSON(manifestFile)
-                        .done(function (manifest){
-
-                            manifest.styles.forEach(function (href) {
-                                var link = document.createElement("link");
-
-                                link.rel = "stylesheet";
-                                link.media = "all";
-                                link.href = outputFolder + href;
-
-                                document.head.appendChild(link);
-                            });
-
-                            scriptsToLoad = manifest.scripts.length;
-                            manifest.scripts.forEach(function (src) {
-                                var script = document.createElement("script");
-
-                                script.onload = onScriptLoad;
-                                script.src = outputFolder + src;
-                                script.async = false;
-
-                                document.head.appendChild(script);
-                            });
-                        })
+                    loadManifest(manifestFile);
                 });
         })();
     </script>

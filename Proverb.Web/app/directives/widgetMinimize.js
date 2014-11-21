@@ -1,8 +1,6 @@
-﻿(function () {
+(function () {
     "use strict";
-
     var app = angular.module("app");
-
     app.directive("widgetMinimize", function () {
         // Usage:
         // <a widget-minimize></a>
@@ -14,13 +12,11 @@
             restrict: "A"
         };
         return directive;
-
         function link(scope, element, attrs) {
             //$("body").on("click", ".widget .wminimize", minimize);
             attrs.$set("href", "#");
             attrs.$set("wminimize", undefined);
             element.click(minimize);
-
             function minimize(e) {
                 e.preventDefault();
                 var $wcontent = element.parent().parent().next(".widget-content");
@@ -28,7 +24,8 @@
                 if ($wcontent.is(":visible")) {
                     iElement.removeClass("fa fa-chevron-up");
                     iElement.addClass("fa fa-chevron-down");
-                } else {
+                }
+                else {
                     iElement.removeClass("fa fa-chevron-down");
                     iElement.addClass("fa fa-chevron-up");
                 }

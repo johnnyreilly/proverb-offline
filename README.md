@@ -4,11 +4,11 @@ Proverb is a simple app that stores the wise sayings of sages.  This is a collec
 
 This repository is using the following technologies:
 
-- ASP.Net Web API
-- Entity Framework 6 Code First
-- TypeScript
-- AngularJS
-- SQL Server
+- ASP.Net Web API 2.2
+- Entity Framework 6.1.1 Code First
+- TypeScript 1.3
+- AngularJS 1.3
+- SQL Server 2008 R2
 
 The focus of this repository is swapping out Web Optimization and using GulpJS to generate minified assets.
 
