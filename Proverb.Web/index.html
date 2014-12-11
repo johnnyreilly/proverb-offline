@@ -44,7 +44,7 @@
         (function () {
 
             var appConfig = {},
-                outputFolder,
+                //outputFolder,
                 scriptsToLoad;
 
             /**
@@ -107,7 +107,7 @@
 
                     link.rel = "stylesheet";
                     link.media = "all";
-                    link.href = outputFolder + href;
+                    link.href = /*outputFolder + */href;
 
                     document.head.appendChild(link);
                 });
@@ -117,7 +117,7 @@
                     var script = document.createElement("script");
 
                     script.onload = onScriptLoad;
-                    script.src = outputFolder + src;
+                    script.src = /*outputFolder + */src;
                     script.async = false;
 
                     document.head.appendChild(script);
@@ -134,7 +134,7 @@
                     var buildFolder = appConfig.appRoot + "build/";
                     var debugOrRelease = (appConfig.inDebug ? "debug" : "release");
                     var manifestFile = buildFolder + "manifest-" + debugOrRelease + ".json";
-                    outputFolder = buildFolder + debugOrRelease + "/";
+                    //outputFolder = buildFolder + debugOrRelease + "/";
 
                     loadManifest(manifestFile);
                 });
