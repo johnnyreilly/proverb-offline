@@ -43,9 +43,7 @@
     <script>
         (function () {
 
-            var appConfig = {},
-                //outputFolder,
-                scriptsToLoad;
+            var appConfig = {}, scriptsToLoad;
 
             /**
              * Load JavaScript and CSS listed in manifest file
@@ -107,7 +105,7 @@
 
                     link.rel = "stylesheet";
                     link.media = "all";
-                    link.href = /*outputFolder + */href;
+                    link.href = href;
 
                     document.head.appendChild(link);
                 });
@@ -117,7 +115,7 @@
                     var script = document.createElement("script");
 
                     script.onload = onScriptLoad;
-                    script.src = /*outputFolder + */src;
+                    script.src = src;
                     script.async = false;
 
                     document.head.appendChild(script);
@@ -130,11 +128,8 @@
 
                     appConfig = startUpData;
 
-                    // Determine the assets folder depending upon whether in debug mode or not
-                    var buildFolder = appConfig.appRoot + "build/";
-                    var debugOrRelease = (appConfig.inDebug ? "debug" : "release");
-                    var manifestFile = buildFolder + "manifest-" + debugOrRelease + ".json";
-                    //outputFolder = buildFolder + debugOrRelease + "/";
+                    var manifestFile = appConfig.appRoot + "build/manifest-" + 
+                        (appConfig.inDebug ? "debug" : "release") + ".json";
 
                     loadManifest(manifestFile);
                 });
