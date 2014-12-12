@@ -10,7 +10,7 @@ This repository is using the following technologies:
 - AngularJS 1.3
 - SQL Server 2008 R2
 
-The focus of this repository is swapping out Web Optimization and using GulpJS to generate minified assets.
+The focus of this repository is starting the journey towards creating an "offline" version of Proverb.  That is to say one that works like a native app.  This will be implemented with a little help from Service Worker (and so will initially only work on super-up-to-date browsers).
 
 ## Getting Started
 
