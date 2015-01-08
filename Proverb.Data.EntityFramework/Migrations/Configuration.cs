@@ -1,19 +1,17 @@
 namespace Proverb.Data.EntityFramework.Migrations
 {
-    using Proverb.Data.Models;
-    using System;
-    using System.Data.Entity;
+    using Models;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Proverb.Data.EntityFramework.ProverbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ProverbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Proverb.Data.EntityFramework.ProverbContext context)
+        protected override void Seed(ProverbContext context)
         {
             //  This method will be called after migrating to the latest version and every time the 
             //  database is accessed when the solution runs when database initializations are active.
@@ -24,10 +22,10 @@ namespace Proverb.Data.EntityFramework.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
 
-            context.Users.AddOrUpdate(
-                l => l.Id,
-                new User { Id = 1, Name = "Developer", UserName = "dev" }
-            );
+            //context.Users.AddOrUpdate(
+            //    l => l.Id,
+            //    new User { Id = 1, Name = "Any user", UserName = "any.user" }
+            //);
 
             context.Sages.AddOrUpdate(
                 l => l.Id,
@@ -56,7 +54,7 @@ namespace Proverb.Data.EntityFramework.Migrations
                         new Saying { Text = "You don't always get the right things but you can always get the things right" },
                         new Saying { Text = "When you're underwater it doesn't matter if it's by one foot or one metre" },
                         new Saying { Text = "To a frightened man everthing looks like a ghost" },
-                        new Saying { Text = "Women drivers are like stars, you can see them but they can't see you" }
+                        //new Saying { Text = "Women drivers are like stars, you can see them but they can't see you" }
                     }
                 },
                 new Sage
@@ -66,7 +64,7 @@ namespace Proverb.Data.EntityFramework.Migrations
                     Email = "johnny_reilly@hotmail.com",
                     UserName = "john.reilly",
                     Sayings = new[] {
-                        new Saying { Text = "I've got to join Marc's back end up with my front end... I do not see what is funny about that sentence." }
+                        new Saying { Text = "I'm an iron.  I bring order to chaos!" }
                     }
                 },
                 new Sage
@@ -87,7 +85,7 @@ namespace Proverb.Data.EntityFramework.Migrations
                         new Saying { Text = "I am band 'C' because I see everything (Marc T speaking about Arul who had assigned developers to band 'A' and band 'B' depending on their grooming contributions)" }
                     }
                 },
-                new Sage
+                /*new Sage
                 {
                     Id = 6,
                     Name = "Pauline Davis",
@@ -95,7 +93,7 @@ namespace Proverb.Data.EntityFramework.Migrations
                     Sayings = new[] {
                         new Saying { Text = "Have you still got it up Marc and can I see it? Pauline enquiring about Five Guys webpage" }
                     }
-                },
+                },*/
                 new Sage
                 {
                     Id = 7,
