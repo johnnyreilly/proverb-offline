@@ -8,13 +8,19 @@ before_build:
 
     npm install -g bower
 
-    install npm -g gulp
+    #install npm -g gulp
 
     cd Proverb.Web
 
     bower install
 
-    npm install
+    write-host "Show me the Angular..."
+
+    ls .\bower_components
+
+    ls .\bower_components\angular
+
+    #npm install
 
     cd ../
 
