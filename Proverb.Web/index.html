@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script>
         (function () {
 
@@ -98,7 +98,7 @@
             /**
              * Iterate through the manifest and build up scripts and style tags and add them to the page
              */
-            function addScriptsAndStylesToPage(manifest){
+            function addScriptsAndStylesToPage(manifest) {
 
                 manifest.styles.forEach(function (href) {
                     var link = document.createElement("link");
@@ -128,7 +128,7 @@
 
                     appConfig = startUpData;
 
-                    var manifestFile = appConfig.appRoot + "build/manifest-" + 
+                    var manifestFile = appConfig.appRoot + "build/manifest-" +
                         (appConfig.inDebug ? "debug" : "release") + ".json";
 
                     loadManifest(manifestFile);

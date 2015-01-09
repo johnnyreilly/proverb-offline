@@ -29,21 +29,21 @@ var filesAndFolders = {
     css: "css",
 
     // The fonts we want Gulp to process
-    fonts: ["./fonts/*.*"],
+    fonts: ["bower_components/fontawesome/fonts/*.*"],
 
     // The scripts we want Gulp to process
     scripts: [
         // Vendor Scripts 
-        "scripts/angular.js",
-        "scripts/angular-animate.js",
-        "scripts/angular-route.js",
-        "scripts/angular-sanitize.js",
-        "scripts/angular-ui/ui-bootstrap-tpls.js",
+        "bower_components/angular/angular.js",
+        "bower_components/angular-animate/angular-animate.js",
+        "bower_components/angular-route/angular-route.js",
+        "bower_components/angular-sanitize/angular-sanitize.js",
+        "bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
 
-        "scripts/toastr.js",
-        "scripts/moment.js",
+        "bower_components/toastr/toastr.js",
+        "bower_components/moment/moment.js",
         "scripts/spin.js",
-        "scripts/underscore.js",
+        "bower_components/underscore/underscore.js",
 
         // Bootstrapping
         "app/app" + tsjsmapjsSuffix,
@@ -75,9 +75,9 @@ var filesAndFolders = {
     // The styles we want Gulp to process
     styles: [
         "content/ie10mobile.css",
-        "content/bootstrap.css",
-        "content/font-awesome.css",
-        "content/toastr.css",
+        "bower_components/bootstrap/dist/css/bootstrap.css",
+        "bower_components/fontawesome/css/font-awesome.css",
+        "bower_components/toastr/toastr.css",
         "content/styles.css"
     ]
 };
@@ -161,6 +161,7 @@ gulp.task("manifest-styles-debug", ["styles-debug", "manifest-scripts-debug"], f
 
     return gulp
         .src(filesAndFolders.debugFolder + "**/*.css*")
+        .pipe(order(filesAndFolders.styles))
         .pipe(getManifest(filesAndFolders.debug, bundleNames.styles));
 });
 

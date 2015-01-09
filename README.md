@@ -14,15 +14,17 @@ The focus of this repository is starting the journey towards creating an "offlin
 
 ## Getting Started
 
-You need to install [node and npm](http://nodejs.org/). Once you've done that you'll need to install Gulp globally at the command line:
+You need to install [node and npm](http://nodejs.org/). Once you've done that you'll need to install Gulp and Bower globally at the command line:
 
 ```
+npm install -g bower
 install npm -g gulp
 ```
 
-Inside the Proverb.Web folder you'll need to install the node packages that Gulp uses, to do that just type:
+Inside the Proverb.Web folder you'll need to install the packages that Gulp and Bower use, to do that just type:
 
 ```
+bower install
 npm install
 ```
 

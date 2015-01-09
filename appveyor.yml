@@ -6,6 +6,18 @@ before_build:
 
     nuget restore Proverb.sln
 
+    npm install -g bower
+
+    install npm -g gulp
+
+    cd Proverb.Web
+
+    bower install
+
+    npm install
+
+    cd ../
+
 build:
   project: Proverb.sln
   verbosity: minimal
@@ -23,8 +35,9 @@ before_test:
     Write-Host $ChutzpahCmd
 
     Invoke-Expression $ChutzpahCmd
-    
+
     # Upload results to AppVeyor one by one
+
     $testsuites = [xml](get-content .\chutzpah-results.xml)
     
     $anyFailures = $FALSE

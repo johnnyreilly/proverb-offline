@@ -1026,7 +1026,6 @@ form label {
 .user .btn {
   font-size: 11px !important;
 }
-/*#endregion */
 /*#region Override background color theme */
 /*For Bootstrap 3*/
 .nav,
@@ -1479,5 +1478,4 @@ select.ng-invalid {
     line-height: 1.2em !important;
   }
 }
-/*#endregion */
 /*# sourceMappingURL=styles.css.map */

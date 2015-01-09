@@ -1,17 +1,17 @@
 ﻿{
     "References": [
-        { "Path": "../Proverb.Web/scripts/jQuery-2.1.1.js" },
-        { "Path": "../Proverb.Web/scripts/angular.js" },
-        { "Path": "../Proverb.Web/scripts/angular-animate.js"},
-        { "Path": "../Proverb.Web/scripts/angular-route.js"},
-        { "Path": "../Proverb.Web/scripts/angular-sanitize.js"},
-        { "Path": "../Proverb.Web/scripts/angular-ui/ui-bootstrap-tpls.js"},
-        { "Path": "../Proverb.Web/scripts/angular-mocks.js"},
+        { "Path": "../Proverb.Web/bower_components/jquery/dist/jquery.js" },
+        { "Path": "../Proverb.Web/bower_components/angular/angular.js" },
+        { "Path": "../Proverb.Web/bower_components/angular-animate/angular-animate.js"},
+        { "Path": "../Proverb.Web/bower_components/angular-route/angular-route.js"},
+        { "Path": "../Proverb.Web/bower_components/angular-sanitize/angular-sanitize.js"},
+        { "Path": "../Proverb.Web/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"},
+        { "Path": "../Proverb.Web/bower_components/angular-mocks/angular-mocks.js"},
 
-        { "Path": "../Proverb.Web/scripts/toastr.js" },
-        { "Path": "../Proverb.Web/scripts/moment.js" },
+        { "Path": "../Proverb.Web/bower_components/toastr/toastr.js" },
+        { "Path": "../Proverb.Web/bower_components/moment/moment.js" },
         { "Path": "../Proverb.Web/scripts/spin.js" },
-        { "Path": "../Proverb.Web/scripts/underscore.js" },
+        { "Path": "../Proverb.Web/bower_components/underscore/underscore.js" },
 
         { "Path": "../Proverb.Web/app/common/common.js" },
         { "Path": "../Proverb.Web/app/common/logger.js" },
