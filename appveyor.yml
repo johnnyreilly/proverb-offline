@@ -10,7 +10,11 @@ before_build:
 
     #install npm -g gulp
 
-    cd Proverb.Web
+    write-host "Present working directory: $($pwd.Path)"
+
+    Push-Location  "$($env:APPVEYOR_BUILD_FOLDER)\Proverb.Web" 
+
+    write-host "Present working directory: $($pwd.Path)"
 
     bower install
 
@@ -22,7 +26,7 @@ before_build:
 
     #npm install
 
-    cd ../
+    Pop-Location
 
 build:
   project: Proverb.sln
