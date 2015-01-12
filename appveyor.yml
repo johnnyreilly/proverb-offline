@@ -18,12 +18,6 @@ before_build:
 
     bower install
 
-    write-host "Show me the Angular..."
-
-    ls .\bower_components
-
-    ls .\bower_components\angular
-
     #npm install
 
     Pop-Location
