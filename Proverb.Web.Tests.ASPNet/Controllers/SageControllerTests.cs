@@ -1,4 +1,10 @@
-﻿using log4net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Proverb.Data.Common;
@@ -6,12 +12,6 @@ using Proverb.Data.Models;
 using Proverb.Services.Interfaces;
 using Proverb.Web.Controllers;
 using Proverb.Web.Helpers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
 
 namespace Proverb.Web.Tests.ASPNet.Controllers
 {
@@ -117,20 +117,6 @@ namespace Proverb.Web.Tests.ASPNet.Controllers
             var ok = result as OkResult;
             Assert.IsNotNull(ok);
             _sageServiceMock.Verify(x => x.UpdateAsync(_sage));
-        }
-
-        [Ignore]
-        [TestMethod, TestCategory(CATEGORY)]
-        public async Task Delete_returns_a_NotFound()
-        {
-            _sageServiceMock
-                .Setup(x => x.DeleteAsync(_sage.Id));
-
-            IHttpActionResult result = await _controller.Delete(_sage.Id);
-
-            var notFound = result as NotFoundResult;
-            Assert.IsNotNull(notFound);
-            _sageServiceMock.Verify(x => x.DeleteAsync(_sage.Id));
         }
 
         [TestMethod, TestCategory(CATEGORY)]

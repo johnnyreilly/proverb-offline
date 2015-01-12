@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Proverb.Data.CommandQuery.Interfaces;
 using Proverb.Data.Models;
@@ -17,8 +14,8 @@ namespace Proverb.Services
             _sageQuery = sageQuery;
         }
 
-        private ISageCommand _sageCommand;
-        private ISageQuery _sageQuery;
+        private readonly ISageCommand _sageCommand;
+        private readonly ISageQuery _sageQuery;
 
         public async Task<int> CreateAsync(Sage sage)
         {

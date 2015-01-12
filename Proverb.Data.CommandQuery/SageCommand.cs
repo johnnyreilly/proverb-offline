@@ -1,40 +1,38 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Proverb.Data.CommandQuery.Interfaces;
 using Proverb.Data.EntityFramework;
 using Proverb.Data.Models;
-using System.Threading.Tasks;
 
 namespace Proverb.Data.CommandQuery
 {
     public class SageCommand : BaseCommandQuery, ISageCommand
     {
-        public SageCommand(ProverbContext context) : base(context) { }
+        public SageCommand(ProverbContext dbContext) : base(dbContext) { }
 
         public async Task<int> CreateAsync(Sage sage)
         {
-            _context.Sages.Add(sage);
+            DbContext.Sages.Add(sage);
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
 
             return sage.Id;
         }
 
         public async Task DeleteAsync(int id) 
         {
-            var userToDelete = await _context.Sages.FindAsync(id);
+            var userToDelete = await DbContext.Sages.FindAsync(id);
             
-            _context.Sages.Remove(userToDelete);
+            DbContext.Sages.Remove(userToDelete);
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Sage sage)
         {
-            _context.Entry(sage).State = EntityState.Modified;
+            DbContext.Entry(sage).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
     }
 }

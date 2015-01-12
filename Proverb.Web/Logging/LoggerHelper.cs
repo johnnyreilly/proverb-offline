@@ -1,6 +1,7 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Reflection;
+using log4net;
+using log4net.Config;
 
 namespace Proverb.Web.Logging
 {
@@ -31,7 +32,7 @@ namespace Proverb.Web.Logging
                 if (!logRepository.Configured)
                 {
                     configuredAlready = false;
-                    log4net.Config.XmlConfigurator.Configure();
+                    XmlConfigurator.Configure();
                 }
 
                 //Come up with a name for our logger eg "Proverb.Web v1.0.4857.27024"
@@ -42,7 +43,7 @@ namespace Proverb.Web.Logging
                     : AppDomain.CurrentDomain.SetupInformation.ApplicationBase; //If this lives is stored in the root of a drive (unlikely) then use the path for a name
                 var loggerName = string.Format("{0} v{1}",
                     loggerNamePrefix, //The path of the application executing
-                    assembly.GetName().Version.ToString());
+                    assembly.GetName().Version);
 
                 //Get our logger
                 _logger = LogManager.GetLogger(loggerName);

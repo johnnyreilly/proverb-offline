@@ -1,11 +1,12 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using System.Security.Principal;
+using System.Web;
+using System.Web.Http;
+using Autofac;
 using Autofac.Integration.WebApi;
 using Proverb.Data.EntityFramework;
 using Proverb.Web.Helpers;
 using Proverb.Web.Logging;
-using System.Reflection;
-using System.Security.Principal;
-using System.Web;
 
 namespace Proverb.Web
 {
@@ -52,7 +53,7 @@ namespace Proverb.Web
 
             // Set the dependency resolver for Web API.
             var webApiResolver = new AutofacWebApiDependencyResolver(container);
-            System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = webApiResolver;
+            GlobalConfiguration.Configuration.DependencyResolver = webApiResolver;
 
             return container;
         }

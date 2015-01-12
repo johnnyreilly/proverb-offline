@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Proverb.Data.Models;
 using Proverb.Data.Common;
+using Proverb.Data.Models;
 
 namespace Proverb.Services.Interfaces
 {

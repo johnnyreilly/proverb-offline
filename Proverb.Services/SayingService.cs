@@ -1,9 +1,9 @@
-﻿using Proverb.Data.CommandQuery.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Proverb.Data.CommandQuery.Interfaces;
 using Proverb.Data.Common;
 using Proverb.Data.Models;
 using Proverb.Services.Interfaces;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Proverb.Services
 {
@@ -15,8 +15,8 @@ namespace Proverb.Services
             _sayingQuery = sayingQuery;
         }
 
-        private ISayingCommand _sayingCommand;
-        private ISayingQuery _sayingQuery;
+        private readonly ISayingCommand _sayingCommand;
+        private readonly ISayingQuery _sayingQuery;
 
         public async Task<int> CreateAsync(Saying saying)
         {

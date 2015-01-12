@@ -1,18 +1,15 @@
-﻿using log4net;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Proverb.Services.Interfaces;
 using Proverb.Web.Controllers;
 using Proverb.Web.Helpers;
 using Proverb.Web.Models;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace Proverb.Web.UnitTests.Controllers
 {
@@ -74,7 +71,7 @@ namespace Proverb.Web.UnitTests.Controllers
             IHttpActionResult result = await _controller.Get();
 
             var ok = result as OkNegotiatedContentResult<StartUpData>;
-            var startUpData = ok.Content as StartUpData;
+            var startUpData = ok.Content;
             Assert.AreEqual(_appName, startUpData.AppName);
             Assert.AreEqual("http://localhost/", startUpData.AppRoot);
             Assert.AreEqual(_inDebug, startUpData.InDebug);

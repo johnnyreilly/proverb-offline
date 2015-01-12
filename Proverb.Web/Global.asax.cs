@@ -1,13 +1,13 @@
-﻿using Autofac;
+﻿using System;
+using System.Web;
+using System.Web.Http;
+using Autofac;
 using Proverb.Web.Helpers;
 using Proverb.Web.Logging;
-using System;
-using System.Web.Http;
-using System.Web.Routing;
 
 namespace Proverb.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         /// <summary>
         /// Will be instantiated in Application_Start - exists purely to allow Session_Start to use Autofac
@@ -43,7 +43,7 @@ namespace Proverb.Web
 
         protected void Session_End(object sender, EventArgs eventArgs)
         {
-            LoggerHelper.Logger.InfoFormat("Session stopping for session id: {0}", Session.SessionID.ToString());
+            LoggerHelper.Logger.InfoFormat("Session stopping for session id: {0}", Session.SessionID);
         }
     }
 }

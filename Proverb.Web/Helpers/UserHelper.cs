@@ -1,7 +1,7 @@
-﻿using log4net;
-using Proverb.Services.Interfaces;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using System.Threading.Tasks;
+using Proverb.Data.Models;
+using Proverb.Services.Interfaces;
 
 namespace Proverb.Web.Helpers
 {
@@ -52,7 +52,7 @@ namespace Proverb.Web.Helpers
             if (user == null)
             {
                 // No user exists so let's create one
-                user = new Data.Models.User
+                user = new User
                 {
                     Name = UserName,
                     UserName = UserName

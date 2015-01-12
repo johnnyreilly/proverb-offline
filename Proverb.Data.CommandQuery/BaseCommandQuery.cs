@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 using Proverb.Data.EntityFramework;
 
 namespace Proverb.Data.CommandQuery
 {
     public abstract class BaseCommandQuery : IDisposable
     {
-        protected ProverbContext _context;
+        protected ProverbContext DbContext;
 
-        public BaseCommandQuery(ProverbContext context) 
+        protected BaseCommandQuery(ProverbContext dbContext) 
         {
-            _context = context;
+            DbContext = dbContext;
         }
 
-        private bool _disposed = false;
+        private bool _disposed;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -25,7 +20,7 @@ namespace Proverb.Data.CommandQuery
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    DbContext.Dispose();
                 }
             }
             _disposed = true;

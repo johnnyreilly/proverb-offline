@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Proverb.Data.CommandQuery.Interfaces;
 using Proverb.Data.Models;
@@ -17,8 +14,8 @@ namespace Proverb.Services
             _userQuery = userQuery;
         }
 
-        private IUserCommand _userCommand;
-        private IUserQuery _userQuery;
+        private readonly IUserCommand _userCommand;
+        private readonly IUserQuery _userQuery;
 
         public async Task<int> CreateAsync(User user)
         {

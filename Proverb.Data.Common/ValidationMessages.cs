@@ -5,7 +5,7 @@ namespace Proverb.Data.Common
 {
     public class ValidationMessages
     {
-        private Dictionary<string, IEnumerable<string>> _errors = new Dictionary<string, IEnumerable<string>>();
+        private readonly Dictionary<string, IEnumerable<string>> _errors = new Dictionary<string, IEnumerable<string>>();
 
         public ValidationMessages() 
         {
@@ -18,7 +18,7 @@ namespace Proverb.Data.Common
 
         public void AddError(string field, string error)
         {
-            this.Errors.Add(field, new string[] { error });
+            Errors.Add(field, new[] { error });
         }
 
         public Dictionary<string, IEnumerable<string>> Errors 

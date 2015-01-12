@@ -1,13 +1,9 @@
-﻿using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using log4net;
 using Proverb.Services.Interfaces;
 using Proverb.Web.Helpers;
 using Proverb.Web.Models;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Proverb.Web.Controllers
 {

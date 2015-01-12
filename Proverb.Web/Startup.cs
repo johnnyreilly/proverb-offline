@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
+using Proverb.Web;
 
-[assembly: OwinStartup(typeof(Proverb.Web.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace Proverb.Web
 {

@@ -1,40 +1,38 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using Proverb.Data.CommandQuery.Interfaces;
 using Proverb.Data.EntityFramework;
 using Proverb.Data.Models;
-using System.Threading.Tasks;
 
 namespace Proverb.Data.CommandQuery
 {
     public class SayingCommand : BaseCommandQuery, ISayingCommand
     {
-        public SayingCommand(ProverbContext context) : base(context) { }
+        public SayingCommand(ProverbContext dbContext) : base(dbContext) { }
 
         public async Task<int> CreateAsync(Saying saying)
         {
-            _context.Sayings.Add(saying);
+            DbContext.Sayings.Add(saying);
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
 
             return saying.Id;
         }
 
         public async Task DeleteAsync(int id)
         {
-            var userToDelete = await _context.Sayings.FindAsync(id);
+            var userToDelete = await DbContext.Sayings.FindAsync(id);
 
-            _context.Sayings.Remove(userToDelete);
+            DbContext.Sayings.Remove(userToDelete);
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Saying saying)
         {
-            _context.Entry(saying).State = EntityState.Modified;
+            DbContext.Entry(saying).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
     }
 }

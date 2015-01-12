@@ -1,5 +1,4 @@
-﻿using System.Security.Principal;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Proverb.Web.Helpers
 {

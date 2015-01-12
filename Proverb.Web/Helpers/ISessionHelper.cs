@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Proverb.Web.Helpers
+﻿namespace Proverb.Web.Helpers
 {
     public interface ISessionHelper
     {

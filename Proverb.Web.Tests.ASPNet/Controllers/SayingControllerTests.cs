@@ -1,18 +1,14 @@
-﻿using log4net;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
+using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Proverb.Data.Models;
 using Proverb.Services.Interfaces;
 using Proverb.Web.Controllers;
 using Proverb.Web.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
-using System.Web.Mvc;
 
 namespace Proverb.Web.Tests.ASPNet.Controllers
 {

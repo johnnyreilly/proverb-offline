@@ -1,11 +1,10 @@
-﻿using log4net;
-using Proverb.Data.Common;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using log4net;
 using Proverb.Data.Models;
 using Proverb.Services.Interfaces;
 using Proverb.Web.Common.SaveHelpers;
 using Proverb.Web.Helpers;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Proverb.Web.Controllers
 {
@@ -31,8 +30,7 @@ namespace Proverb.Web.Controllers
 
             if (sage == null)
                 return NotFound();
-            else
-                return Ok(sage);
+            return Ok(sage);
         }
 
         public async Task<IHttpActionResult> Get()

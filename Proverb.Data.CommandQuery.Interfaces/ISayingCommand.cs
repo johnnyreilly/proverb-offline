@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Proverb.Data.Models;
-using System.Threading.Tasks;
 
 namespace Proverb.Data.CommandQuery.Interfaces
 {
