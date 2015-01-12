@@ -46,6 +46,7 @@
     <None Include="chutzpah.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\sages\sageEdit.js" />
     <Content Include="app\sayings\sayings.js" />
     <Content Include="app\sages\sageDetail.js" />
     <Content Include="app\sages\sages.js" />

@@ -5,12 +5,12 @@
         module("app");
     });
 
-    describe("sageDetail ->", function () {
+    describe("sageEdit ->", function () {
 
         var $rootScope,
             getById_deferred, // deferred used for promises
-            $location, $routeParams_stub, common, datacontext, // controller dependencies
-            sageDetailController; // the controller
+            $location, $scope, $routeParams_stub, common, datacontext, // controller dependencies
+            sageEditController; // the controller
 
         beforeEach(inject(function (_$controller_, _$location_, _$rootScope_, _$q_, _common_, _datacontext_) {
 
@@ -18,6 +18,7 @@
             $q = _$q_;
 
             $location = _$location_;
+            $scope = $rootScope.$new();
             common = _common_;
             datacontext = _datacontext_;
 
@@ -31,31 +32,30 @@
             });
             spyOn($location, "path")/*.and.returnValue(jasmine.createSpy("path"))*/;
 
-            sageDetailController = _$controller_("sageDetail", {
+            sageEditController = _$controller_("sageEdit", {
                 $location: $location,
+                $scope: $scope,
                 $routeParams: $routeParams_stub,
                 common: common,
                 datacontext: datacontext
             });
-
-
         }));
 
         describe("on creation ->", function () {
 
-            it("controller should have a title of 'Sage Details'", function () {
+            it("controller should have a title of 'Sage Edit'", function () {
 
-                expect(sageDetailController.title).toBe("Sage Details");
+                expect(sageEditController.title).toBe("Sage Edit");
             });
 
             it("controller should have no sage", function () {
 
-                expect(sageDetailController.sage).toBeUndefined();
+                expect(sageEditController.sage).toBeUndefined();
             });
 
             it("datacontext.sage.getById should be called", function () {
 
-                expect(datacontext.sage.getById).toHaveBeenCalledWith(10, true);
+                expect(datacontext.sage.getById).toHaveBeenCalledWith(10);
             });
         });
 
@@ -71,34 +71,34 @@
                 getById_deferred.resolve(sage_stub);
                 $rootScope.$digest(); // So Angular processes the resolved promise
 
-                expect(sageDetailController.sage).toBe(sage_stub);
+                expect(sageEditController.sage).toBe(sage_stub);
             });
 
-            it("should log 'Activated Sage Details View' and set title with name", function () {
+            it("should log 'Activated Sage Edit View' and set title with name", function () {
 
                 getById_deferred.resolve(sage_stub);
                 $rootScope.$digest(); // So Angular processes the resolved promise
 
-                expect(sageDetailController.log.info).toHaveBeenCalledWith("Activated Sage Details View");
-                expect(sageDetailController.title).toBe("Sage Details: " + sage_stub.name);
+                expect(sageEditController.log.info).toHaveBeenCalledWith("Activated Sage Edit View");
+                expect(sageEditController.title).toBe("Sage Edit: " + sage_stub.name);
             });
         });
 
-        describe("gotoEdit ->", function () {
-
-            var sage_stub;
-            beforeEach(function () {
-                sage_stub = { id: 20 };
-            });
-
-            it("should set $location.path to edit URL with the sage id", function () {
-
-                sageDetailController.sage = sage_stub;
-
-                sageDetailController.gotoEdit();
-
-                expect($location.path).toHaveBeenCalledWith("/sages/edit/" + sage_stub.id);
-            });
-        });
+        //describe("gotoEdit ->", function () {
+        //
+        //    var sage_stub;
+        //    beforeEach(function () {
+        //        sage_stub = { id: 20 };
+        //    });
+        //
+        //    it("should set $location.path to edit URL with the sage id", function () {
+        //
+        //        sageEditController.sage = sage_stub;
+        //
+        //        sageEditController.gotoEdit();
+        //
+        //        expect($location.path).toHaveBeenCalledWith("/sages/edit/" + sage_stub.id);
+        //    });
+        //});
     });
 });
