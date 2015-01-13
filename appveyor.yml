@@ -1,9 +1,7 @@
 version: 1.0.{build}
 os: Visual Studio 2015 Preview
-before_build:
-- ps: >-
+before_build: |
     # Pick up nuget packages
-
     nuget restore Proverb.sln
 
     npm install -g bower
