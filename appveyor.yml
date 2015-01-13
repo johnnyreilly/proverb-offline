@@ -1,12 +1,9 @@
 version: 1.0.{build}
 os: Visual Studio 2015 Preview
 before_build: |
-    # Pick up nuget packages
     nuget restore Proverb.sln
 
     npm install -g bower
-
-    #install npm -g gulp
 
     write-host "Present working directory: $($pwd.Path)"
 
@@ -15,8 +12,6 @@ before_build: |
     write-host "Present working directory: $($pwd.Path)"
 
     bower install
-
-    #npm install
 
     Pop-Location
 
