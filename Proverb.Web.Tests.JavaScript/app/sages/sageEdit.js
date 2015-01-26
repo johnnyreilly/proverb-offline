@@ -29,7 +29,8 @@
             spyOn(datacontext.sage, "getById").and.returnValue(getById_deferred.promise);
             spyOn(common, "activateController").and.callThrough();
             spyOn(common.logger, "getLoggers").and.returnValue({
-                info: jasmine.createSpy("logInfo")
+                info: jasmine.createSpy("logInfo"),
+                success: jasmine.createSpy("logSuccess")
             });
         }));
 
@@ -139,12 +140,14 @@
                 expect(common.waiter).toHaveBeenCalledWith(save_deferred.promise, "sageEdit", "Saving " + sage_stub.name);
             });
 
-            xit("should set $location.path to edit URL with the sage id", function () {
-        
-                sageEditController.sage = sage_stub;
+            it("should set $location.path to edit URL with the sage id", function () {
         
                 sageEditController.save();
-        
+
+                save_deferred.resolve();
+                $rootScope.$digest(); // So Angular processes the resolved promise
+
+                expect(sageEditController.log.success).toHaveBeenCalledWith("Saved " + sage_stub.name);
                 expect($location.path).toHaveBeenCalledWith("/sages/detail/" + sage_stub.id);
             });
         });
