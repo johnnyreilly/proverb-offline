@@ -29,6 +29,7 @@
             spyOn(datacontext.sage, "getById").and.returnValue(getById_deferred.promise);
             spyOn(common, "activateController").and.callThrough();
             spyOn(common.logger, "getLoggers").and.returnValue({
+                error: jasmine.createSpy("logError"),
                 info: jasmine.createSpy("logInfo"),
                 success: jasmine.createSpy("logSuccess")
             });
@@ -141,7 +142,7 @@
             });
 
             it("should set $location.path to edit URL with the sage id", function () {
-        
+
                 sageEditController.save();
 
                 save_deferred.resolve();
@@ -149,6 +150,38 @@
 
                 expect(sageEditController.log.success).toHaveBeenCalledWith("Saved " + sage_stub.name);
                 expect($location.path).toHaveBeenCalledWith("/sages/detail/" + sage_stub.id);
+            });
+
+            it("should log failure to save", function () {
+
+                var reject = {};
+
+                sageEditController.save();
+
+                save_deferred.reject(reject);
+                $rootScope.$digest(); // So Angular processes the resolved promise
+
+                expect(sageEditController.log.error).toHaveBeenCalledWith("Failed to save " + sage_stub.name, reject);
+            });
+
+            it("should log failure to save by field name", function () {
+
+                sageEditController.$scope.form = {};
+                var reject = {
+                    errors: {
+                        "sage.userName": ["I'm a validation", "Me too"]
+                    }
+                };
+
+                sageEditController.save();
+
+                save_deferred.reject(reject);
+                $rootScope.$digest(); // So Angular processes the resolved promise
+
+                expect(sageEditController.log.error).toHaveBeenCalledWith(reject.errors["sage.userName"]);
+                expect(sageEditController.errors).toEqual({
+                    "sage.userName": "I'm a validation,Me too"
+                });
             });
         });
     });
