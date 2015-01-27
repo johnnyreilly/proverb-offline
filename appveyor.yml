@@ -37,6 +37,13 @@ before_build:
 #
 #    Pop-Location
 
+# scripts to run before build
+before_build:
+- cmd: >-
+    cd Proverb.Web
+
+    gulp
+
 build:
   project: Proverb.sln
   publish_wap: true
