@@ -99,9 +99,11 @@ before_test:
 
 deploy:
 - provider: WebDeploy
-  server: https://proverb.scm.azurewebsites.net:443/msdeploy.axd?site=proverb
+  server:
+    secure: NvzatElBACvT9rl9q93l4Ou1LdB7WvF4cAV61SyergZ20myLeUxsCfsUkgsGTcjC8Khw2jC0HrTdJsGrfwx2YCI90yYgC7xqDnGF4TLpnc0=
   website: proverb
-  username: $proverb
+  username:
+    secure: hF4z+9jP+et7duuTVWcVBw==
   password:
     secure: dSc6RSokZrmvp0+a4tYUSJhsVUN+IasvnJ8LrQpQCoqUOIfYF5TbNK7E6MGGH1K7ao3UzrSUodQ18KJhhvsI9g==
   remove_files: true

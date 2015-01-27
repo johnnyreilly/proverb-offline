@@ -20,10 +20,10 @@ var excludetsjsmap = "**/*.{ts,js.map}";
 
 var bundleNames = { scripts: "scripts", styles: "styles" };
 
-var filesAndFolders = {
+var paths = {
 
     base: ".",
-    buildBaseFolder: "./build/",
+    buildDir: "./build/",
     debug: "debug",
     release: "release",
     css: "css",
@@ -82,8 +82,8 @@ var filesAndFolders = {
     ]
 };
 
-filesAndFolders.debugFolder = filesAndFolders.buildBaseFolder + "/" + filesAndFolders.debug + "/";
-filesAndFolders.releaseFolder = filesAndFolders.buildBaseFolder + "/" + filesAndFolders.release + "/";
+paths.debugFolder = paths.buildDir + paths.debug + "/";
+paths.releaseFolder = paths.buildDir + paths.release + "/";
 
 
 /**
@@ -95,7 +95,7 @@ filesAndFolders.releaseFolder = filesAndFolders.buildBaseFolder + "/" + filesAnd
 function getManifest(manifestName, bundleName) {
 
     // Determine filename ("./build/manifest-debug.json" or "./build/manifest-release.json"
-    var manifestFile = filesAndFolders.buildBaseFolder + "manifest-" + manifestName + ".json";
+    var manifestFile = paths.buildDir + "manifest-" + manifestName + ".json";
 
     gulpUtil.log("Creating manifest: " + manifestFile);
 
@@ -118,8 +118,8 @@ function getScriptsAndTemplates(isDebug) {
     //Get the view templates for $templateCache
     var templates = gulp.src("app/**/*.html").pipe(templateCache({ module: "app", root: "app/" }));
 
-    var options = isDebug ? { base: filesAndFolders.base } : undefined;
-    var scripts = gulp.src(filesAndFolders.scripts, options);
+    var options = isDebug ? { base: paths.base } : undefined;
+    var scripts = gulp.src(paths.scripts, options);
 
     var combined = eventStream.merge(scripts, templates);
 
@@ -129,40 +129,48 @@ function getScriptsAndTemplates(isDebug) {
 // Delete the build folder
 gulp.task("clean", function (cb) {
 
-    return del([filesAndFolders.buildBaseFolder], cb);
+    return del([paths.buildDir], cb);
 });
 
-// Copy across all files in filesAndFolders.scripts to build/debug
+// Create a manifest.json for the debug build - this should have lots of script files in
+gulp.task("boot-dependencies", ["clean"], function () {
+
+    return gulp
+        .src("bower_components/jquery/dist/jquery.min.js")
+        .pipe(gulp.dest(paths.buildDir));
+});
+
+// Copy across all files in paths.scripts to build/debug
 gulp.task("scripts-debug", ["clean"], function () {
 
     return getScriptsAndTemplates(true)
-        .pipe(gulp.dest(filesAndFolders.debugFolder));
+        .pipe(gulp.dest(paths.debugFolder));
 });
 
 // Create a manifest.json for the debug build - this should have lots of script files in
 gulp.task("manifest-scripts-debug", ["scripts-debug"], function () {
 
     return gulp
-        .src(filesAndFolders.debugFolder + "**/*.js")
-        .pipe(order(filesAndFolders.scripts)) // templates.js is not in filesAndFolders.scripts and so this will be the last script (which is fine)
-        .pipe(getManifest(filesAndFolders.debug, bundleNames.scripts));
+        .src(paths.debugFolder + "**/*.js")
+        .pipe(order(paths.scripts)) // templates.js is not in paths.scripts and so this will be the last script (which is fine)
+        .pipe(getManifest(paths.debug, bundleNames.scripts));
 });
 
-// Copy across all files in filesAndFolders.styles to build/debug
+// Copy across all files in paths.styles to build/debug
 gulp.task("styles-debug", ["clean"], function () {
 
     return gulp
-        .src(filesAndFolders.styles, { base: filesAndFolders.base })
-        .pipe(gulp.dest(filesAndFolders.debugFolder));
+        .src(paths.styles, { base: paths.base })
+        .pipe(gulp.dest(paths.debugFolder));
 });
 
 // Create a manifest.json for the debug build - this should have lots of style files in
 gulp.task("manifest-styles-debug", ["styles-debug", "manifest-scripts-debug"], function () {
 
     return gulp
-        .src(filesAndFolders.debugFolder + "**/*.css*")
-        .pipe(order(filesAndFolders.styles))
-        .pipe(getManifest(filesAndFolders.debug, bundleNames.styles));
+        .src(paths.debugFolder + "**/*.css*")
+        .pipe(order(paths.styles))
+        .pipe(getManifest(paths.debug, bundleNames.styles));
 });
 
 // Concatenate & Minify JS for release into a single file
@@ -173,48 +181,57 @@ gulp.task("scripts-release", ["clean"], function () {
         .pipe(concat("app.js"))                          // Make a single file                                                         
         .pipe(uglify())                                  // Make the file titchy tiny small
         .pipe(rev())                                     // Suffix a version number to it
-        .pipe(gulp.dest(filesAndFolders.releaseFolder)); // Write single versioned file to build/release folder
+        .pipe(gulp.dest(paths.releaseFolder)); // Write single versioned file to build/release folder
 });
 
 // Create a manifest.json for the release build - this should just have a single file for scripts
 gulp.task("manifest-scripts-release", ["scripts-release"], function () {
 
     return gulp
-        .src(filesAndFolders.releaseFolder + "**/*.js") // Should only be 1 file
-        .pipe(getManifest(filesAndFolders.release, bundleNames.scripts));
+        .src(paths.releaseFolder + "**/*.js") // Should only be 1 file
+        .pipe(getManifest(paths.release, bundleNames.scripts));
 });
 
-// Copy across all files in filesAndFolders.styles to build/debug
+// Copy across all files in paths.styles to build/debug
 gulp.task("styles-release", ["clean"], function () {
 
     return gulp
-        .src(filesAndFolders.styles)
+        .src(paths.styles)
         .pipe(concat("app.css"))          // Make a single file
         .pipe(minifyCss())                // Make the file titchy tiny small
         .pipe(rev())                      // Suffix a version number to it
-        .pipe(gulp.dest(filesAndFolders.releaseFolder + "/" + filesAndFolders.css)); // Write single versioned file to build/release folder
+        .pipe(gulp.dest(paths.releaseFolder + "/" + paths.css)); // Write single versioned file to build/release folder
 });
 
 // Create a manifest.json for the debug build - this should have a single style files in
 gulp.task("manifest-styles-release", ["styles-release", "manifest-scripts-release"], function () {
 
     return gulp
-        .src(filesAndFolders.releaseFolder + "**/*.css") // Should only be 1 file
-        .pipe(getManifest(filesAndFolders.release, bundleNames.styles));
+        .src(paths.releaseFolder + "**/*.css") // Should only be 1 file
+        .pipe(getManifest(paths.release, bundleNames.styles));
 });
 
-// Copy across all fonts in filesAndFolders.fonts to both release and debug locations
-gulp.task("fonts", ["clean"], function () {
+// Copy across all fonts in paths.fonts to both release and debug locations
+gulp.task("fonts-debug", ["clean"], function () {
 
     return gulp
-        .src(filesAndFolders.fonts, { base: filesAndFolders.base })
-        .pipe(gulp.dest(filesAndFolders.debugFolder))
-        .pipe(gulp.dest(filesAndFolders.releaseFolder));
+        .src(paths.fonts, { base: paths.base })
+        .pipe(gulp.dest(paths.debugFolder));
+});
+
+// Copy across all fonts in paths.fonts to both release and debug locations
+gulp.task("fonts-release", ["clean"], function () {
+
+    return gulp
+        .src(paths.fonts)
+        .pipe(gulp.dest(paths.releaseFolder + "/fonts"));
 });
 
 // Default Task
 gulp.task("default", [
-    "scripts-debug", "manifest-scripts-debug", "styles-debug", "manifest-styles-debug",
-    "scripts-release", "manifest-scripts-release", "styles-release", "manifest-styles-release",
-    "fonts"
+    "boot-dependencies",
+
+    "scripts-debug", "manifest-scripts-debug", "styles-debug", "manifest-styles-debug", "fonts-debug",
+
+    "scripts-release", "manifest-scripts-release", "styles-release", "manifest-styles-release", "fonts-release"
 ]);
