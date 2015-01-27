@@ -1,26 +1,37 @@
 version: 1.0.{build}
 os: Visual Studio 2015 CTP
 before_build:
-- ps: >-
-    # Pick up nuget packages
-
+- cmd: >-
     nuget restore Proverb.sln
 
     npm install -g bower
 
-    #install npm -g gulp
-
-    write-host "Present working directory: $($pwd.Path)"
-
-    Push-Location  "$($env:APPVEYOR_BUILD_FOLDER)\Proverb.Web" 
-
-    write-host "Present working directory: $($pwd.Path)"
+    cd Proverb.Web
 
     bower install
 
-    #npm install
+    cd ..
 
-    Pop-Location
+#- ps: >-
+#    # Pick up nuget packages
+#
+#    nuget restore Proverb.sln
+#
+#    npm install -g bower
+#
+#    #install npm -g gulp
+#
+#    write-host "Present working directory: $($pwd.Path)"
+#
+#    Push-Location  "$($env:APPVEYOR_BUILD_FOLDER)\Proverb.Web" 
+#
+#    write-host "Present working directory: $($pwd.Path)"
+#
+#    bower install
+#
+#    #npm install
+#
+#    Pop-Location
 
 build:
   project: Proverb.sln
@@ -85,3 +96,12 @@ before_test:
         $host.SetShouldExit(1)
 
     }
+
+deploy:
+- provider: WebDeploy
+  server: https://proverb.scm.azurewebsites.net:443/msdeploy.axd?site=proverb
+  website: proverb
+  username: $proverb
+  password:
+    secure: dSc6RSokZrmvp0+a4tYUSJhsVUN+IasvnJ8LrQpQCoqUOIfYF5TbNK7E6MGGH1K7ao3UzrSUodQ18KJhhvsI9g==
+  remove_files: true
