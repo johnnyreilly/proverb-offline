@@ -5,10 +5,14 @@ before_build:
     nuget restore Proverb.sln
 
     npm install -g bower
+    
+    npm install -g gulp
 
     cd Proverb.Web
 
     bower install
+    
+    npm install
 
     cd ..
 
@@ -35,6 +39,7 @@ before_build:
 
 build:
   project: Proverb.sln
+  publish_wap: true
   verbosity: minimal
 
 before_test:
