@@ -32,10 +32,15 @@ build_script:
 
     gulp release-build
 
-    msbuild Proverb.Web.csproj /t:Package /p:PackageLocation=Proverb.Web.zip
+    msbuild Proverb.Web.csproj /t:Package /p:PackageLocation=..\Proverb.Web.zip
 
     cd ..
 
+artifacts:
+- path: Proverb.Web.zip
+  name: WebApplication
+  type: WebDeployPackage
+    
 before_test:
 - ps: >-
     # Locate Chutzpah
