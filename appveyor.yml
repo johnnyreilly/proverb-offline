@@ -28,17 +28,9 @@ before_build:
 
 build_script:
 - cmd: >-
-    # Full build of solution takes place
-
     msbuild Proverb.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-
-    # JavaScript files created from TypeScript are turned into build artefacts by Gulp
-
     gulp release-build
-
-
-    # Everything that has been built gets packaged
 
     msbuild Proverb.Web\Proverb.Web.csproj /t:Package /p:PackageLocation=Proverb.Web.zip
 
