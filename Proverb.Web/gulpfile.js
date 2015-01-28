@@ -99,7 +99,7 @@ function getManifest(manifestName, bundleName) {
     // Determine filename ("./build/manifest-debug.json" or "./build/manifest-release.json"
     var manifestFile = paths.buildDir + "manifest-" + manifestName + ".json";
 
-    gulpUtil.log("Creating manifest: " + manifestFile);
+    gulpUtil.log("Creating " + bundleName + " manifest: " + manifestFile);
 
     return manifest({
         bundleName: bundleName,
