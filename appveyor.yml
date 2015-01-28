@@ -21,31 +21,26 @@ before_build:
 
     cd ..
 
-#- ps: >-
-#    # Pick up nuget packages
-#
-#    nuget restore Proverb.sln
-#
-#    npm install -g bower
-#
-#    #install npm -g gulp
-#
-#    write-host "Present working directory: $($pwd.Path)"
-#
-#    Push-Location  "$($env:APPVEYOR_BUILD_FOLDER)\Proverb.Web" 
-#
-#    write-host "Present working directory: $($pwd.Path)"
-#
-#    bower install
-#
-#    #npm install
-#
-#    Pop-Location
+#build:
+#  project: Proverb.sln
+#  publish_wap: true
+#  verbosity: minimal
 
-build:
-  project: Proverb.sln
-  publish_wap: true
-  verbosity: minimal
+build_script:
+- cmd: >-
+    # Full build of solution takes place
+
+    msbuild Proverb.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+
+    # JavaScript files created from TypeScript are turned into build artefacts by Gulp
+
+    gulp release-build
+
+
+    # Everything that has been built gets packaged
+
+    msbuild Proverb.Web\Proverb.Web.csproj /t:Package /p:PackageLocation=Proverb.Web.zip
 
 before_test:
 - ps: >-
