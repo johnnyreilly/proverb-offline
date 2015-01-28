@@ -27,12 +27,9 @@ before_build:
 #  verbosity: minimal
 
 build_script:
-- cmd: >-
-    msbuild Proverb.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-
-    gulp release-build
-
-    msbuild Proverb.Web\Proverb.Web.csproj /t:Package /p:PackageLocation=Proverb.Web.zip
+- cmd: msbuild Proverb.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+- cmd: gulp release-build
+- cmd: msbuild Proverb.Web\Proverb.Web.csproj /t:Package /p:PackageLocation=Proverb.Web.zip
 
 before_test:
 - ps: >-
