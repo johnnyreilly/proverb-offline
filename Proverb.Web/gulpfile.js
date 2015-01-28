@@ -14,7 +14,9 @@ var templateCache = require("gulp-angular-templatecache");
 var eventStream = require("event-stream");
 var order = require("gulp-order");
 var gulpUtil = require("gulp-util");
+//var sourcemaps = require('gulp-sourcemaps');
 
+//var tsjsmapjsSuffix = ".js";
 var tsjsmapjsSuffix = ".{ts,js.map,js}";
 var excludetsjsmap = "**/*.{ts,js.map}";
 
@@ -144,6 +146,8 @@ gulp.task("boot-dependencies", ["clean"], function () {
 gulp.task("scripts-debug", ["clean"], function () {
 
     return getScriptsAndTemplates(true)
+        //.pipe(sourcemaps.init({ loadMaps: true, debug: true }))
+        //.pipe(sourcemaps.write('maps', { includeContent: true, sourceRoot: "/app" }))
         .pipe(gulp.dest(paths.debugFolder));
 });
 
@@ -226,6 +230,13 @@ gulp.task("fonts-release", ["clean"], function () {
         .src(paths.fonts)
         .pipe(gulp.dest(paths.releaseFolder + "/fonts"));
 });
+
+// Default Task
+gulp.task("release-build", [
+    "boot-dependencies",
+
+    "scripts-release", "manifest-scripts-release", "styles-release", "manifest-styles-release", "fonts-release"
+]);
 
 // Default Task
 gulp.task("default", [

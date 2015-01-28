@@ -16,7 +16,7 @@ before_build:
     
     npm install
 
-    gulp
+    gulp release-build
 
     cd ..
 
