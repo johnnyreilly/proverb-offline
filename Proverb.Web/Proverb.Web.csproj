@@ -150,6 +150,7 @@
     <Content Include="app\common\bootstrap\bootstrap.dialog.html" />
     <Content Include="app\dashboard\dashboard.html" />
     <Content Include="app\directives\waiter.html" />
+    <Content Include="app\index.html" />
     <Content Include="app\layout\shell.html" />
     <Content Include="app\layout\sidebar.html" />
     <Content Include="app\layout\topnav.html" />
@@ -205,10 +206,9 @@
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="gulpfile.config.js" />
     <Content Include="gulpfile.js" />
-    <Content Include="index.html" />
     <Content Include="package.json" />
-    <None Include="Properties\PublishProfiles\proverb.pubxml" />
     <Content Include="Scripts\spin.js" />
     <Content Include="Scripts\spin.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -224,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -474,7 +475,6 @@
       CustomCollectFiles;
       $(CopyAllFilesToSingleFolderForPackageDependsOn);
     </CopyAllFilesToSingleFolderForPackageDependsOn>
-  
     <CopyAllFilesToSingleFolderForMsdeployDependsOn>
       CustomCollectFiles;
       $(CopyAllFilesToSingleFolderForPackageDependsOn);
@@ -483,9 +483,8 @@
   <Target Name="CustomCollectFiles">
     <ItemGroup>
       <_CustomFiles Include="build\**\*" />
-
-      <FilesForPackagingFromProject  Include="%(_CustomFiles.Identity)">
-          <DestinationRelativePath>build\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
+        <DestinationRelativePath>build\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
   </Target>
