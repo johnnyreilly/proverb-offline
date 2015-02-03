@@ -209,8 +209,6 @@
     <Content Include="gulpfile.config.js" />
     <Content Include="gulpfile.js" />
     <Content Include="package.json" />
-    <Content Include="Scripts\spin.js" />
-    <Content Include="Scripts\spin.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

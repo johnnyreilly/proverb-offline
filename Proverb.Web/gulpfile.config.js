@@ -30,7 +30,7 @@ var config = {
 
         bower + "toastr/toastr.js",
         bower + "moment/moment.js",
-        "scripts/spin.js",
+        bower + "spin.js/spin.js",
         bower + "underscore/underscore.js",
 
         // Bootstrapping
