@@ -30,7 +30,7 @@ build_script:
 
     cd Proverb.Web
 
-    gulp release-build
+    gulp build-release
 
     msbuild Proverb.Web.csproj /t:Package /p:PackageLocation=..\Proverb.Web.zip
 
