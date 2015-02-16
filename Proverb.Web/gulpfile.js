@@ -152,9 +152,9 @@ gulp.task("styles-release", ["clean"], function () {
 
     return gulp
         .src(getStyles())
-        .pipe(concat("app.css"))          // Make a single file
-        .pipe(minifyCss())                // Make the file titchy tiny small
-        .pipe(rev())                      // Suffix a version number to it
+        .pipe(concat("app.css"))                                   // Make a single file
+        .pipe(minifyCss())                                         // Make the file titchy tiny small
+        .pipe(rev())                                               // Suffix a version number to it
         .pipe(gulp.dest(config.releaseFolder + "/" + config.css)); // Write single versioned file to build/release folder
 });
 
@@ -177,11 +177,11 @@ gulp.task("fonts-release", ["clean"], function () {
 });
 
 gulp.task("build-debug", [
-    "boot-dependencies", "inject-debug", "scripts-debug", "styles-debug", "fonts-debug"
+    "boot-dependencies", "inject-debug", "fonts-debug"
 ]);
 
 gulp.task("build-release", [
-    "boot-dependencies", "inject-release", "scripts-release", "styles-release", "fonts-release"
+    "boot-dependencies", "inject-release", "fonts-release"
 ]);
 
 // Default Task
