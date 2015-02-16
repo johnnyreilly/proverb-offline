@@ -11,14 +11,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
-    <script>
-        if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
-            var msViewportStyle = document.createElement("style");
-            var mq = "@@-ms-viewport{width:auto!important}";
-            msViewportStyle.appendChild(document.createTextNode(mq));
-            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
-        }
-    </script>
+    <!-- inject:css -->
+    <!-- endinject -->
+
     <link rel="icon" type="image/png" href="content/images/icon.png">
 </head>
 <body>
@@ -41,98 +36,25 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/build/jquery.min.js">\x3C/script>')</script>
+
+    <!-- inject:js -->
+    <!-- endinject -->
+
     <script>
         (function () {
 
-            var appConfig = {}, scriptsToLoad;
+            // Load startup data from the server
+            $.getJSON("api/Startup")
+                .done(function (startUpData) {
 
-            /**
-             * Load JavaScript and CSS listed in manifest file
-             */
-            function loadManifest(manifestFile) {
-                $.getJSON(manifestFile)
-                    .done(function (manifest) {
-                        if (!appConfig.inDebug) {
-                            // If not in release mode then process the manifest straight away - we can assume it's all present and correct
-                            addScriptsAndStylesToPage(manifest);
-                        }
-                        else if (manifest.scripts && manifest.styles) {
-                            // If in debug mode and both scripts and styles are present and correct then process the manifest
-                            addScriptsAndStylesToPage(manifest);
-                        }
-                        else {
-                            // Reload if it looks like the manifest wasn't finished building
-                            setTimeout(function () { loadManifest(manifestFile); }, 500);
-                        }
-                    })
-                    .fail(function (jqXHR) {
-                        console.error("Failed to load " + manifestFile);
-                        // For 404's in debug mode then re-attempt - probably gulp hadn't finished running by the time the page was served
-                        if (appConfig.inDebug && jqXHR.status === 404) {
-                            setTimeout(function () { loadManifest(manifestFile); }, 500);
-                        }
-                    });
-            }
-
-            /**
-             * Handler which fires as each script loads
-             */
-            function onScriptLoad(event) {
-
-                scriptsToLoad -= 1;
-
-                //console.log("Loaded " + this.src + ", scriptsToLoad: " + scriptsToLoad);
-
-                // Now all the scripts are present start the app
-                if (scriptsToLoad === 0) {
                     angularApp.start({
                         thirdPartyLibs: {
                             moment: window.moment,
                             toastr: window.toastr,
                             underscore: window._
                         },
-                        appConfig: appConfig
+                        appConfig: startUpData
                     });
-                }
-            }
-
-            /**
-             * Iterate through the manifest and build up scripts and style tags and add them to the page
-             */
-            function addScriptsAndStylesToPage(manifest) {
-
-                manifest.styles.forEach(function (href) {
-                    var link = document.createElement("link");
-
-                    link.rel = "stylesheet";
-                    link.media = "all";
-                    link.href = href;
-
-                    document.head.appendChild(link);
-                });
-
-                scriptsToLoad = manifest.scripts.length;
-                manifest.scripts.forEach(function (src) {
-                    var script = document.createElement("script");
-
-                    script.onload = onScriptLoad;
-                    script.src = src;
-                    script.async = false;
-
-                    document.head.appendChild(script);
-                });
-            }
-
-            // Load startup data from the server
-            $.getJSON("api/Startup")
-                .done(function (startUpData) {
-
-                    appConfig = startUpData;
-
-                    var manifestFile = appConfig.appRoot + "build/manifest-" +
-                        (appConfig.inDebug ? "debug" : "release") + ".json";
-
-                    loadManifest(manifestFile);
                 });
         })();
     </script>

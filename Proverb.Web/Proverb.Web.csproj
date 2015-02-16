@@ -189,7 +189,6 @@
     <Content Include="Content\customtheme.css">
       <DependentUpon>customtheme.less</DependentUpon>
     </Content>
-    <Content Include="Content\ie10mobile.css" />
     <Content Include="Content\images\icon.png" />
     <Content Include="Content\images\socrates-statue.jpg" />
     <Content Include="Content\styles.css.map">

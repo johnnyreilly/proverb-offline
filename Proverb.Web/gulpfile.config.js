@@ -11,8 +11,6 @@ var config = {
     release: "release",
     css: "css",
 
-    bundleNames: { scripts: "scripts", styles: "styles" },
-
     bootFile: app + "index.html",
     bootjQuery: bower + "jquery/dist/jquery.min.js",
 
@@ -21,18 +19,6 @@ var config = {
 
     // The scripts we want Gulp to process
     scripts: [
-        // Vendor Scripts 
-        bower + "angular/angular.js",
-        bower + "angular-animate/angular-animate.js",
-        bower + "angular-route/angular-route.js",
-        bower + "angular-sanitize/angular-sanitize.js",
-        bower + "angular-bootstrap/ui-bootstrap-tpls.js",
-
-        bower + "toastr/toastr.js",
-        bower + "moment/moment.js",
-        bower + "spin.js/spin.js",
-        bower + "underscore/underscore.js",
-
         // Bootstrapping
         app + "app" + tsjsmapjsSuffix,
         app + "config.route" + tsjsmapjsSuffix,
@@ -62,12 +48,13 @@ var config = {
 
     // The styles we want Gulp to process
     styles: [
-        "content/ie10mobile.css",
-        bower + "bootstrap/dist/css/bootstrap.css",
-        bower + "fontawesome/css/font-awesome.css",
-        bower + "toastr/toastr.css",
         "content/styles.css"
-    ]
+    ],
+
+    wiredepOptions: {
+        exclude: [/jquery/],
+        ignorePath: ".."
+    }
 };
 
 config.debugFolder = config.buildDir + config.debug + "/";
