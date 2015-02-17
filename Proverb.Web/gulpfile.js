@@ -62,10 +62,7 @@ function getScriptsAndTemplates(isDebug) {
     var appScripts = gulp.src(getScripts(), options);
 
     //Get the view templates for $templateCache
-    var templates = gulp.src([
-                "app/**/*.html",
-                "!app/index.html" // Exclude the launch page
-            ])
+    var templates = gulp.src(config.templateFiles)
         .pipe(templateCache({ module: "app", root: "app/" }));
 
     var combined = eventStream.merge(appScripts, templates);
@@ -119,18 +116,9 @@ gulp.task("inject-release", ["styles-release", "scripts-release"], function () {
 
 gulp.task("scripts-debug", ["clean"], function () {
 
-    gulpUtil.log("Copy across all files in config.scripts to build/debug");
+    gulpUtil.log("Copy across all JavaScript files to build/debug");
 
     return getScriptsAndTemplates(true)
-        .pipe(gulp.dest(config.debugFolder));
-});
-
-gulp.task("styles-debug", ["clean"], function () {
-
-    gulpUtil.log("Copy across all files in config.styles to build/debug");
-
-    return gulp
-        .src(getStyles(), { base: config.base })
         .pipe(gulp.dest(config.debugFolder));
 });
 
@@ -144,6 +132,15 @@ gulp.task("scripts-release", ["clean"], function () {
         .pipe(uglify())                           // Make the file titchy tiny small
         .pipe(rev())                              // Suffix a version number to it
         .pipe(gulp.dest(config.releaseFolder));   // Write single versioned file to build/release folder
+});
+
+gulp.task("styles-debug", ["clean"], function () {
+
+    gulpUtil.log("Copy across all CSS files to build/debug");
+
+    return gulp
+        .src(getStyles(), { base: config.base })
+        .pipe(gulp.dest(config.debugFolder));
 });
 
 gulp.task("styles-release", ["clean"], function () {

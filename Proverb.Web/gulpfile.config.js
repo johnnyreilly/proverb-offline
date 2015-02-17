@@ -60,4 +60,10 @@ var config = {
 config.debugFolder = config.buildDir + config.debug + "/";
 config.releaseFolder = config.buildDir + config.release + "/";
 
+config.templateFiles = [
+    app + "**/*.html",
+    "!" + config.bootFile // Exclude the launch page
+];
+
+
 module.exports = config;
