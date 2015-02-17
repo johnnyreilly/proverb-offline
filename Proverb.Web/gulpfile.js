@@ -21,6 +21,8 @@ var config = require("./gulpfile.config.js");
 
 /**
  * Get the scripts or styles the app requires by combining bower dependencies and app dependencies
+ * 
+ * @param {string} jsOrCss Should be "js" or "css"
  */
 function getScriptsOrStyles(jsOrCss) {
 
