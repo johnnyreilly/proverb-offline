@@ -184,5 +184,11 @@ gulp.task("build-release", [
     "boot-dependencies", "inject-release", "fonts-release"
 ]);
 
-// Default Task
-gulp.task("default", ["build-debug"]);
+// Use the web.config to determine whether the default task should create a debug or a release build
+// If the web.config contains this: '<compilation debug="true"' then we do a default build, otherwise
+// we do a release build.  It's a little hacky but generally works
+var fs = require('fs');
+var data = fs.readFileSync(__dirname + "/web.config", "UTF-8");
+var inDebug = !!data.match(/<compilation debug="true"/); 
+
+gulp.task("default", [(inDebug ? "build-debug" : "build-release")]);
