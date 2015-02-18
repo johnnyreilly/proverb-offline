@@ -81,11 +81,15 @@ gulp.task("clean", function (cb) {
 
 gulp.task("boot-dependencies", ["clean"], function () {
 
-    gulpUtil.log("Get dependencies needed for boot (just jQuery for now)");
+    gulpUtil.log("Get dependencies needed for boot (jQuery and images)");
 
-    return gulp
-        .src([config.bootjQuery])
+    var jQuery = gulp.src(config.bootjQuery);
+    var images = gulp.src(config.images, { base: config.base });
+
+    var combined = eventStream.merge(jQuery, images)
         .pipe(gulp.dest(config.buildDir));
+
+    return combined;
 });
 
 gulp.task("inject-debug", ["styles-debug", "scripts-debug"], function () {

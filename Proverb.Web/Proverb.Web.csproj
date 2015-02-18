@@ -172,7 +172,7 @@
     <Content Include="app\services\repositories.js">
       <DependentUpon>repositories.ts</DependentUpon>
     </Content>
-    <Content Include="Content\customtheme.css.map">
+    <Content Include="styles\customtheme.css.map">
       <DependentUpon>customtheme.css</DependentUpon>
     </Content>
     <Content Include="app\services\repositories.js.map">
@@ -185,23 +185,23 @@
       <DependentUpon>sayingEdit.ts</DependentUpon>
     </Content>
     <Content Include="bower.json" />
-    <None Include="Content\customtheme.less" />
-    <Content Include="Content\customtheme.css">
+    <None Include="styles\customtheme.less" />
+    <Content Include="styles\customtheme.css">
       <DependentUpon>customtheme.less</DependentUpon>
     </Content>
-    <Content Include="Content\images\icon.png" />
-    <Content Include="Content\images\socrates-statue.jpg" />
-    <Content Include="Content\styles.css.map">
+    <Content Include="images\icon.png" />
+    <Content Include="images\socrates-statue.jpg" />
+    <Content Include="styles\styles.css.map">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="app\sayings\sayings.js.map">
       <DependentUpon>sayings.ts</DependentUpon>
     </Content>
-    <None Include="Content\styles.less" />
-    <Content Include="Content\styles.css">
+    <None Include="styles\styles.less" />
+    <Content Include="styles\styles.css">
       <DependentUpon>styles.less</DependentUpon>
     </Content>
-    <Content Include="Content\styles.min.css">
+    <Content Include="styles\styles.min.css">
       <DependentUpon>styles.css</DependentUpon>
     </Content>
     <Content Include="Global.asax" />

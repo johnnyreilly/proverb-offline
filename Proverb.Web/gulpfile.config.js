@@ -17,6 +17,8 @@ var config = {
     // The fonts we want Gulp to process
     fonts: [bower + "fontawesome/fonts/*.*"],
 
+    images: "images/**/*.{gif,jpg,png}",
+
     // The scripts we want Gulp to process
     scripts: [
         // Bootstrapping
@@ -48,7 +50,7 @@ var config = {
 
     // The styles we want Gulp to process
     styles: [
-        "content/styles.css"
+        "styles/styles.css"
     ],
 
     wiredepOptions: {
