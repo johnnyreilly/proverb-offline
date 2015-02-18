@@ -485,6 +485,11 @@
       </FilesForPackagingFromProject>
     </ItemGroup>
   </Target>
+  <ItemGroup>
+  <ExcludeFromPackageFolders Include="Scripts;Images;Styles;node_modules;bower_components" Condition="'$(Configuration)' == 'Release'">
+    <FromTarget>Project</FromTarget>
+  </ExcludeFromPackageFolders>
+  </ItemGroup>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>
