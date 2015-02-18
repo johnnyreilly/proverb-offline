@@ -4,6 +4,7 @@ var gulp = require("gulp");
 // Include Our Plugins
 var concat = require("gulp-concat");
 var ignore = require("gulp-ignore");
+var less = require('gulp-less');
 var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
@@ -15,6 +16,7 @@ var order = require("gulp-order");
 var gulpUtil = require("gulp-util");
 var wiredep = require("wiredep");
 var inject = require("gulp-inject");
+//var print = require("gulp-print");
 
 // Get our config
 var config = require("./gulpfile.config.js");
@@ -26,15 +28,15 @@ var config = require("./gulpfile.config.js");
  */
 function getScriptsOrStyles(jsOrCss) {
 
-    var bowerScriptsAbsolute = wiredep(config.wiredepOptions)[jsOrCss];
+    var bowerScriptsOrStylesAbsolute = wiredep(config.wiredepOptions)[jsOrCss];
 
-    var bowerScriptsRelative = bowerScriptsAbsolute.map(function makePathRelativeToCwd(file) {
+    var bowerScriptsRelativeOrStyles = bowerScriptsOrStylesAbsolute.map(function makePathRelativeToCwd(file) {
         return path.relative('', file); 
     });
 
-    var appScripts = bowerScriptsRelative.concat(jsOrCss === "js" ? config.scripts : config.styles);
+    var appScriptsOrStyles = bowerScriptsRelativeOrStyles.concat(jsOrCss === "js" ? config.scripts : []);
 
-    return appScripts;
+    return appScriptsOrStyles;
 }
 
 /**
@@ -144,8 +146,10 @@ gulp.task("styles-debug", ["clean"], function () {
 
     gulpUtil.log("Copy across all CSS files to build/debug");
 
-    return gulp
-        .src(getStyles(), { base: config.base })
+    var bowerCss = gulp.src(getStyles(), { base: config.base });
+    var appCss = gulp.src(config.styles).pipe(less());
+
+    return eventStream.merge(bowerCss, appCss)
         .pipe(gulp.dest(config.debugFolder));
 });
 
@@ -153,8 +157,10 @@ gulp.task("styles-release", ["clean"], function () {
 
     gulpUtil.log("Copy across all files in config.styles to build/debug");
 
-    return gulp
-        .src(getStyles())
+    var bowerCss = gulp.src(getStyles());
+    var appCss = gulp.src(config.styles).pipe(less());
+
+    return eventStream.merge(bowerCss, appCss)
         .pipe(concat("app.css"))                                   // Make a single file
         .pipe(minifyCss())                                         // Make the file titchy tiny small
         .pipe(rev())                                               // Suffix a version number to it

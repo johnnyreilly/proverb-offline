@@ -50,7 +50,7 @@ var config = {
 
     // The styles we want Gulp to process
     styles: [
-        "styles/styles.css"
+        "styles/styles.less"
     ],
 
     wiredepOptions: {
