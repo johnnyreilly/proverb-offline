@@ -5,6 +5,7 @@ var gulp = require("gulp");
 var concat = require("gulp-concat");
 var ignore = require("gulp-ignore");
 var less = require('gulp-less');
+var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
@@ -147,7 +148,11 @@ gulp.task("styles-debug", ["clean"], function () {
     gulpUtil.log("Copy across all CSS files to build/debug");
 
     var bowerCss = gulp.src(getStyles(), { base: config.base });
-    var appCss = gulp.src(config.styles).pipe(less());
+
+    var appCss = gulp.src(config.styles)
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(sourcemaps.write());
 
     return eventStream.merge(bowerCss, appCss)
         .pipe(gulp.dest(config.debugFolder));
