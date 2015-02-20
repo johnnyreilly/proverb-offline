@@ -119,7 +119,7 @@ gulp.task("inject-release", ["styles-release", "scripts-release"], function () {
 
     return gulp
         .src(config.bootFile)
-        .pipe(inject(gulp.src(config.releaseFolder + "**/*.{js,css}", { read: false })))
+        .pipe(inject(gulp.src(config.releaseFolder + "**/*.{js,css}", { read: false }), { removeTags: true }))
         .pipe(gulp.dest(config.buildDir));
 });
 
