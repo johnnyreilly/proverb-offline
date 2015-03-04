@@ -4,7 +4,7 @@
 
     var controllerId = "sayings";
 
-    class Sayings {
+    export class Sayings {
 
         log: logger.loggers;
         sageDictionary: { [id: string]: sage };

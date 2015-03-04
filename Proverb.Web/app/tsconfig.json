@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
+        "version": "1.4.1",
         "target": "es5",
-        "module": null,
         "declaration": false,
         "noImplicitAny": true,
         "removeComments": false,
@@ -11,7 +11,8 @@
     "filesGlob": [
         "./**/*.ts",
         "../scripts/typings/**/*.d.ts",
-        "!../scripts/typings/angularjs/angular-mocks.d.ts"
+        "!../scripts/typings/angularjs/angular-mocks.d.ts",
+        "!../scripts/typings/jasmine/jasmine.d.ts"
     ],
     "files": [
         "./about/about.ts",

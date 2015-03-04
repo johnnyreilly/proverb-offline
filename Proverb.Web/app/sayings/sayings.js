@@ -58,6 +58,7 @@ var controllers;
         Sayings.$inject = ["$location", "common", "datacontext"];
         return Sayings;
     })();
+    controllers.Sayings = Sayings;
     angular.module("app").controller(controllerId, Sayings);
 })(controllers || (controllers = {}));
 //# sourceMappingURL=sayings.js.map
