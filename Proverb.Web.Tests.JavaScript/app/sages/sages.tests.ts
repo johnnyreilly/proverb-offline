@@ -15,7 +15,7 @@
             sagesController: controllers.Sages;
 
         beforeEach(inject(function (
-                _$controller_: ng.IControllerService, 
+                _$controller_: ng.IControllerService,
                 _$rootScope_: ng.IRootScopeService,
                 _$q_: ng.IQService,
                 _common_: common,

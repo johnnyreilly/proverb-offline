@@ -49,4 +49,4 @@ describe("Proverb.Web -> app-> controllers ->", function () {
         });
     });
 });
-//# sourceMappingURL=sages.js.map
+//# sourceMappingURL=sages.tests.js.map
