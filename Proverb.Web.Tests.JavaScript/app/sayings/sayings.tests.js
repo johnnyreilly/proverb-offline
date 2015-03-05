@@ -96,4 +96,4 @@ describe("Proverb.Web -> app-> controllers ->", function () {
         });
     });
 });
-//# sourceMappingURL=sayings.js.map
+//# sourceMappingURL=sayings.tests.js.map
