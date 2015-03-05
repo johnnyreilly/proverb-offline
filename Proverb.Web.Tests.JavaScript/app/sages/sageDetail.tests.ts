@@ -7,12 +7,22 @@
 
     describe("sageDetail ->", function () {
 
-        var $rootScope,
-            getById_deferred, // deferred used for promises
-            $location, $routeParams_stub, common, datacontext, // controller dependencies
-            sageDetailController; // the controller
+        var $rootScope: ng.IRootScopeService,
+            $q: ng.IQService,
+            getById_deferred: ng.IDeferred<sage>, // deferred used for promises
+            $location: ng.ILocationService,
+            $routeParams_stub: controllers.sageDetailRouteParams,
+            common: common,
+            datacontext: datacontext, // controller dependencies
+            sageDetailController: controllers.SageDetail; // the controller
 
-        beforeEach(inject(function (_$controller_, _$location_, _$rootScope_, _$q_, _common_, _datacontext_) {
+        beforeEach(inject(function (
+                _$controller_: ng.IControllerService,
+                _$location_: ng.ILocationService,
+                _$rootScope_: ng.IRootScopeService,
+                _$q_: ng.IQService,
+                _common_: common,
+                _datacontext_: datacontext) {
 
             $rootScope = _$rootScope_;
             $q = _$q_;
@@ -61,9 +71,9 @@
 
         describe("activateController ->", function () {
 
-            var sage_stub;
+            var sage_stub: sage;
             beforeEach(function () {
-                sage_stub = { name: "John" };
+                sage_stub = { id: 1, name: "John", username: "john", email: "johnny_reilly@hotmail.com", dateOfBirth: null };
             });
 
             it("should set sage to be the resolved promise values", function () {
@@ -86,9 +96,9 @@
 
         describe("gotoEdit ->", function () {
 
-            var sage_stub;
+            var sage_stub: sage;
             beforeEach(function () {
-                sage_stub = { id: 20 };
+                sage_stub = { id: 1, name: "John", username: "john", email: "johnny_reilly@hotmail.com", dateOfBirth: null };
             });
 
             it("should set $location.path to edit URL with the sage id", function () {

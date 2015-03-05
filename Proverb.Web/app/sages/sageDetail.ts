@@ -4,11 +4,11 @@
 
     var controllerId = "sageDetail";
 
-    interface sageDetailRouteParams extends ng.route.IRouteParamsService {
+    export interface sageDetailRouteParams extends ng.route.IRouteParamsService {
         id: string;
     }
 
-    class SageDetail {
+    export class SageDetail {
 
         log: logger.loggers;
         sage: sage;

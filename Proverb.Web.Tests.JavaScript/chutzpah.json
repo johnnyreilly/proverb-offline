@@ -10,7 +10,7 @@
 
         { "Path": "../Proverb.Web/bower_components/toastr/toastr.js" },
         { "Path": "../Proverb.Web/bower_components/moment/moment.js" },
-        { "Path": "../Proverb.Web/scripts/spin.js" },
+        { "Path": "../Proverb.Web/bower_components/spin.js/spin.js" },
         { "Path": "../Proverb.Web/bower_components/underscore/underscore.js" },
 
         { "Path": "../Proverb.Web/app/common/common.js" },
@@ -34,6 +34,6 @@
         { "Path": "bootstrapper.js" }
     ],
     "Tests": [
-        { "Path": "app", "Include": "*.js" }
+        { "Path": "app", "Include": "*.tests.js" }
     ]
 }
