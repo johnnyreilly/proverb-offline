@@ -584,6 +584,44 @@ declare module ng {
     }
 
     interface IScope extends IRootScopeService { }
+	
+    /**
+     * $scope for ngRepeat directive.
+     * see https://docs.angularjs.org/api/ng/directive/ngRepeat
+     */
+    interface IRepeatScope extends IScope {
+	
+        /**
+         * iterator offset of the repeated element (0..length-1).
+         */
+        $index: number;
+
+        /**
+         * true if the repeated element is first in the iterator.
+         */
+        $first: boolean;
+
+        /**
+         * true if the repeated element is between the first and last in the iterator.
+         */
+        $middle: boolean;
+
+        /**
+         * true if the repeated element is last in the iterator.
+         */
+        $last: boolean;
+
+        /**
+         * true if the iterator position $index is even (otherwise false).
+         */
+        $even: boolean;
+
+        /**
+         * true if the iterator position $index is odd (otherwise false).
+         */
+        $odd: boolean;
+	
+	}
 
     interface IAngularEvent {
         /**
@@ -986,7 +1024,7 @@ declare module ng {
             // Not garanteed to have, since it's a non-mandatory option
             //capacity: number;
         };
-        put(key: string, value?: any): void;
+        put<T>(key: string, value?: T): T;
         get(key: string): any;
         remove(key: string): void;
         removeAll(): void;
@@ -1224,7 +1262,7 @@ declare module ng {
         statusText?: string;
     }
 
-    interface IHttpPromise<T> extends IPromise<T> {
+    interface IHttpPromise<T> extends IPromise<IHttpPromiseCallbackArg<T>> {
         success(callback: IHttpPromiseCallback<T>): IHttpPromise<T>;
         error(callback: IHttpPromiseCallback<any>): IHttpPromise<T>;
         then<TResult>(successCallback: (response: IHttpPromiseCallbackArg<T>) => IPromise<TResult>|TResult, errorCallback?: (response: IHttpPromiseCallbackArg<any>) => any): IPromise<TResult>;
@@ -1463,7 +1501,7 @@ declare module ng {
     // see http://docs.angularjs.org/api/ng.$animate
     ///////////////////////////////////////////////////////////////////////
     interface IAnimateService {
-        addClass(element: JQuery, className: string, done?: Function): void;
+        addClass(element: JQuery, className: string, done?: Function): IPromise<any>;
         enter(element: JQuery, parent: JQuery, after: JQuery, done?: Function): void;
         leave(element: JQuery, done?: Function): void;
         move(element: JQuery, parent: JQuery, after: JQuery, done?: Function): void;

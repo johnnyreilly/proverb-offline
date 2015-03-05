@@ -12,8 +12,8 @@ describe("Proverb.Web -> app-> controllers ->", function () {
             $q: ng.IQService,
             common: common,
             datacontext: datacontext,
-            sage_getAll_deferred: ng.IDeferred<any>,
-            saying_getAll_deferred: ng.IDeferred<any>,
+            sage_getAll_deferred: ng.IDeferred<sage[]>,
+            saying_getAll_deferred: ng.IDeferred<saying[]>,
             sayingsController: controllers.Sayings;
 
         var stubSayings: saying[], stubSages: sage[];
@@ -27,12 +27,12 @@ describe("Proverb.Web -> app-> controllers ->", function () {
         }
 
         beforeEach(inject(function (
-          _$controller_: any,
-          _$location_: ng.ILocationService,
-          _$rootScope_: ng.IRootScopeService,
-          _$q_: ng.IQService,
-          _common_: common,
-          _datacontext_: datacontext) {
+                _$controller_: ng.IControllerService,
+                _$location_: ng.ILocationService,
+                _$rootScope_: ng.IRootScopeService,
+                _$q_: ng.IQService,
+                _common_: common,
+                _datacontext_: datacontext) {
 
             $location = _$location_;
             $rootScope = _$rootScope_;

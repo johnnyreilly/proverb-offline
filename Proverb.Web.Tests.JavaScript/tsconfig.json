@@ -57,6 +57,7 @@
         "../Proverb.Web/scripts/typings/spin/spin.d.ts",
         "../Proverb.Web/scripts/typings/toastr/toastr.d.ts",
         "../Proverb.Web/scripts/typings/underscore/underscore.d.ts",
+        "./app/sages/sages.ts",
         "./app/sayings/sayings.ts",
         "./scripts/typings/jasmine/jasmine.d.ts"
     ]

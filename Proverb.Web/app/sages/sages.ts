@@ -4,7 +4,7 @@
 
     var controllerId = "sages";
 
-    class Sages {
+    export class Sages {
 
         log: logger.loggers;
         sages: sage[];

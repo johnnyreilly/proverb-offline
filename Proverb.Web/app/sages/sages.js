@@ -23,6 +23,7 @@ var controllers;
         Sages.$inject = ["common", "datacontext"];
         return Sages;
     })();
+    controllers.Sages = Sages;
     angular.module("app").controller(controllerId, Sages);
 })(controllers || (controllers = {}));
 //# sourceMappingURL=sages.js.map
