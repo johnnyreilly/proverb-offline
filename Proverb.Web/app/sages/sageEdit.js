@@ -96,6 +96,7 @@ var controllers;
         SageEdit.$inject = ["$location", "$routeParams", "$scope", "bootstrap.dialog", "common", "datacontext"];
         return SageEdit;
     })();
+    controllers.SageEdit = SageEdit;
     angular.module("app").controller(controllerId, SageEdit);
 })(controllers || (controllers = {}));
 //# sourceMappingURL=sageEdit.js.map

@@ -4,15 +4,15 @@
 
     var controllerId = "sageEdit";
 
-    interface sageEditRouteParams extends ng.route.IRouteParamsService {
+    export interface sageEditRouteParams extends ng.route.IRouteParamsService {
         id: string;
     }
 
-    interface sageEditScope extends ng.IScope {
+    export interface sageEditScope extends ng.IScope {
         form: ng.IFormController;
     }
 
-    class SageEdit {
+    export class SageEdit {
 
         dateOfBirthDatePickerIsOpen: boolean;
         errors: { [field: string]: string };
@@ -20,13 +20,13 @@
         sage: sage;
         title: string;
 
-        private _isSavingOrRemoving: boolean;
+        _isSavingOrRemoving: boolean;
 
         static $inject = ["$location", "$routeParams", "$scope", "bootstrap.dialog", "common", "datacontext"];
         constructor(
             private $location: ng.ILocationService,
             private $routeParams: sageEditRouteParams,
-            private $scope: sageEditScope,
+            public  $scope: sageEditScope,
             private bsDialog: bootstrapDialog,
             private common: common,
             private datacontext: datacontext
