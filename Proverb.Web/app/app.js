@@ -75,7 +75,7 @@ var angularApp = (function () {
             return service;
             function request(requestConfig) {
                 // For the loading of HTML templates we want the appRoot to be prefixed to the path
-                // and we want a suffix to either allow caching or prevent caching 
+                // and we want a suffix to either allow caching or prevent caching
                 // (depending on whether in debug mode or not)
                 if (requestConfig.method === "GET" && endsWith(requestConfig.url.toLowerCase(), ".html")) {
                     // If this has already been placed into a primed template cache then we should leave the URL as is

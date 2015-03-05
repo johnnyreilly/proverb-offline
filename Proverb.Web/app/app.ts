@@ -1,4 +1,4 @@
-﻿interface bootstrapper {
+interface bootstrapper {
     thirdPartyLibs: thirdPartyLibs;
     appConfig: appConfig;
 }
@@ -40,22 +40,22 @@ var angularApp = (function () {
     "use strict";
 
     var appName = "app";
-
+    
     // Create Angular "app" module so all modules that depend on it use it
     var app = angular.module(appName, [
-    // Angular modules 
+    // Angular modules
         "ngAnimate",        // animations
         "ngRoute",          // routing
         "ngSanitize",       // sanitizes html bindings (ex: sidebar.js)
 
-    // Custom modules 
+    // Custom modules
         "common",           // common functions, logger, spinner
         "common.bootstrap", // bootstrap dialog wrapper functions
 
     // 3rd Party Modules
         "ui.bootstrap"      // ui-bootstrap (ex: carousel, pagination, dialog)
     ]);
-    
+
     return {
         start: start
     }
@@ -137,7 +137,7 @@ var angularApp = (function () {
             function request(requestConfig: ng.IRequestConfig) {
 
                 // For the loading of HTML templates we want the appRoot to be prefixed to the path
-                // and we want a suffix to either allow caching or prevent caching 
+                // and we want a suffix to either allow caching or prevent caching
                 // (depending on whether in debug mode or not)
                 if (requestConfig.method === "GET" && endsWith(requestConfig.url.toLowerCase(), ".html")) {
 
@@ -231,7 +231,7 @@ var angularApp = (function () {
 
     /**
      * Initialise and then start the application
-     * 
+     *
      * @param bootstrapper The 3rd party libraries and app config data from the server
      */
     function start(bootstrapper: bootstrapper) {
