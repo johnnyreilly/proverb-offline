@@ -79,6 +79,8 @@ before_test:
 
                 Add-AppveyorTest $testcase.name -Outcome Failed -FileName $testsuite.name -ErrorMessage $testcase.failure.message -Duration $time
 
+                $anyFailures = $TRUE
+
             }
 
             else {
