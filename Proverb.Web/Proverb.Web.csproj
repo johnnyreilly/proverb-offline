@@ -469,22 +469,39 @@
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <PropertyGroup>
+    <CompileDependsOn>
+      $(CompileDependsOn);
+      GulpBuild;
+    </CompileDependsOn>
+	<CleanDependsOn>
+      $(CleanDependsOn);
+      GulpClean
+    </CleanDependsOn>
     <CopyAllFilesToSingleFolderForPackageDependsOn>
-      CustomCollectFiles;
+      CollectGulpOutput;
       $(CopyAllFilesToSingleFolderForPackageDependsOn);
     </CopyAllFilesToSingleFolderForPackageDependsOn>
     <CopyAllFilesToSingleFolderForMsdeployDependsOn>
-      CustomCollectFiles;
+      CollectGulpOutput;
       $(CopyAllFilesToSingleFolderForPackageDependsOn);
     </CopyAllFilesToSingleFolderForMsdeployDependsOn>
   </PropertyGroup>
-  <Target Name="CustomCollectFiles">
+  <Target Name="GulpBuild" DependsOnTargets="CompileTypeScript">
+    <Exec Command="npm install" />
+    <Exec Command="bower install" />
+    <Exec Command="gulp --mode $(ConfigurationName)" />
+  </Target>
+  <Target Name="GulpClean">
+    <Exec Command="gulp clean" />
+  </Target>
+  <Target Name="CollectGulpOutput">
     <ItemGroup>
       <_CustomFiles Include="build\**\*" />
       <FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
         <DestinationRelativePath>build\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
       </FilesForPackagingFromProject>
     </ItemGroup>
+    <Message Text="CollectGulpOutput list: %(_CustomFiles.Identity)" />
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />

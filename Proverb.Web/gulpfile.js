@@ -1,4 +1,3 @@
-/// <vs AfterBuild='default' />
 var gulp = require("gulp");
 
 // Include Our Plugins
@@ -17,10 +16,14 @@ var order = require("gulp-order");
 var gulpUtil = require("gulp-util");
 var wiredep = require("wiredep");
 var inject = require("gulp-inject");
-//var print = require("gulp-print");
+var yargs = require("yargs").argv;
 
 // Get our config
 var config = require("./gulpfile.config.js");
+
+// Determine whether we are in debug mode by the value passed to gulp by Visual Studio in the csproj
+var isDebug = yargs.mode === "Debug";
+gulpUtil.log(gulpUtil.colors.green("isDebug: " + isDebug));
 
 /**
  * Get the scripts or styles the app requires by combining bower dependencies and app dependencies
@@ -198,11 +201,4 @@ gulp.task("build-release", [
     "boot-dependencies", "inject-release", "fonts-release"
 ]);
 
-// Use the web.config to determine whether the default task should create a debug or a release build
-// If the web.config contains this: '<compilation debug="true"' then we do a default build, otherwise
-// we do a release build.  It's a little hacky but generally works
-var fs = require('fs');
-var data = fs.readFileSync(__dirname + "/web.config", "UTF-8");
-var inDebug = !!data.match(/<compilation debug="true"/); 
-
-gulp.task("default", [(inDebug ? "build-debug" : "build-release")]);
+gulp.task("default", [(isDebug ? "build-debug" : "build-release")]);
